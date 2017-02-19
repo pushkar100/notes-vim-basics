@@ -359,476 +359,529 @@ Together, they can be effectively used to store and repeat the same sequence of 
 
 ### Start Recording a Macro (Record a Sequence of Commands):
 
-1. Press 'q' plus a register name (say, 1) and you will see "recording" appear on the bottom of the screen. (Ex: 'q1')
-2. Start typing commands. (Ex: djj^)
-3. Press 'q' again to stop recording. (The sequence of commands have been saved in the mentioned register, that is, register '1').
+- Press `q` plus a register name (say, 1) and you will see **recording** appear on the bottom of the screen. (Ex: `q1`)
+- Start typing commands. (Ex: `djj^`)
+- Press `q` again to stop recording. (The sequence of commands have been saved in the mentioned register, that is, register `1`).
 
-Running/Repeating the Macros stored in a Register:
-1. To run a macro once: Type '@' followed by the register name (Ex: '@1' will execute the macro stored in register 1).
-2. To run a previously executed macro: Type '@@' (Ex: '@@' will execute the last macro that was executed from a register).
-3. To executed a macro multiple times: Prefix the execution with a Number (Ex: 10@a will execute macro stored in register 'a' 10 times).
+### Running/Repeating the Macros stored in a Register:
 
-Marking & Remembering a Cursor Position using a Register:
-1. Type 'm' followed by register name. This will remember the position of cursor. (Ex: 'm1')
-2. While editing other portions of the file, if we intend to go to the earlier marked position of the cursor, we can press single quote(') followed by the register name containing the position. (Ex: "'1" will move to cursor position saved in register 1)
-(Note: Press single quote twice Ex: "''" to go back to last marked cursor position.)
+- To run a macro once: Type `@` followed by the register name (Ex: `@1` will execute the macro stored in register 1).
+- To run a previously executed macro: Type `@@` (Ex: `@@` will execute the last macro that was executed from a register).
+- To executed a macro multiple times: Prefix the execution with a Number (Ex: `10@a` will execute macro stored in register `a` 10 times).
 
--------------------- "USE COMMAND LINE DIRECTLY FROM VIM":
+### Marking & Remembering a Cursor Position using a Register:
 
-:!<CLI-command>       = Executes any Command-Line Command. The results are shown on the Terminal & a prompt to return to Vim is shown.
+- Type `m` followed by register name. This will remember the position of cursor. (Ex: `m1`)
+- While editing other portions of the file, if we intend to go to the earlier marked position of the cursor, we can press single quote symbol followed by the register name containing the position. (Ex: "'1" will move to cursor position saved in register 1)
 
-Copy-Pasting the commands from Terminal:
-:r !<CLI-command>  = Copies the results of the executed CLI command and pastes it inside current file under the cursor (New line).
-                     (Alternatively, you can also use ':read !<CLI-command>').
+(Note: Press single quote twice Ex: `''` to go back to last marked cursor position.)
 
-Sending Text inside Vim to CLI Command as Input Text (Std. i/p):
-1. Make a selection for input in Visual Mode.
-2. Run the CLI command with some parameters.
-Ex. ":<','>!coffee -c -s -p" 
-(The above command runs the 'coffee' compiler with -c option to compile, 
--s to take std i/p [The text selected in Visual mode],
--p to print the result in vim instead of saving it to a file)
-(Another Ex: Visually copy haml code and run ":<','>!haml -s" to convert haml to js and replace the former text.)
+## Use Command Line Directly From Vim:
 
--------------------- "AUTOCOMPLETE (CONTEXT MENU) IN VIM":
+- `:!<CLIcommand>`      = Executes any Command-Line Interface(CLI) Command. The results are shown on the Terminal & a prompt to return to Vim is shown.
 
-Pressing '<ctrl-n>' will open up the autocomplete/context dropdown while typing something in INSERT Mode.
+### Copy-Pasting the commands from Terminal:
+
+- `:r !<CLI-command>`  = Copies the results of the executed CLI command and pastes it inside current file under the cursor (New line). Alternatively, you can also use `:read !<CLI-command>`).
+
+### Sending Text inside Vim to CLI Command as Input Text (Standard input):
+
+- Make a selection for input in Visual Mode.
+- Run the CLI command with some parameters.
+
+Example:
+
+`:<','>!coffee -c -s -p`
+
+(The above command runs the 'coffee' compiler with `-c` option to compile, `-s` to take standard input (The text selected in Visual mode),`-p` to print the result in vim instead of saving it to a file)
+
+Another Example: 
+
+Visually copy haml code and run `:<','>!haml -s` to convert haml to js and replace the former text.)
+
+## Autocomplete in Vim:
+
+Pressing `<ctrl-n>` will open up the autocomplete/context dropdown while typing something in INSERT Mode.
 This context menu feature can be used to autocomplete function names/object properties/variables/etc. appearing in the file.
 
-Passing through the Context Menu dropdown:
-'<ctrl-n>' goes downwards.
-'<ctrl-p>' goes upwards.
+### Passing through the Context Menu dropdown:
+- `<ctrl-n>` goes downwards.
+- `<ctrl-p>` goes upwards.
 
-(We can replace '<ctrl-n>' with another character, like <Tab>, which is easier to use - See Mappings section for shortcuts.)
+(We can replace `<ctrl-n>` with another character, like <Tab>, which is easier to use - See Mappings section for shortcuts.)
 
--------------------- "BUFFERS IN VIM":
+## Buffers in Vim:
 
-Buffers are special places in memory that store information about the files that are open in Vim.
-Each file opened in vim is allocated a buffer of its own. 
-(Ex: Opening vim with `vim single.js index.html` will actually open two files(buffers) but we see only one at a time.)
+Buffers are special places in memory that store information about the files that are open in Vim. Each file opened in vim is allocated a buffer of its own. (Ex: Opening vim with `vim single.js index.html` will actually open two files(buffers) but we see only one at a time.)
 
-View the list of open files in vim:
-:ls     = Displays the buffers and information about the files they hold. (Format: BufferNumber-Flags-FileName)
-(Note:
-Flags Inside the buffer listing: 
-  The current buffer (currently visible file) is marked with '%a', and 
-  previously visited file (previous buffer) is marked with a '#'
-)
+### View the list of open files in vim:
 
-Visiting Other buffers:
-:bn     = Opens the NEXT buffer (Alternate: ':bnext') (Use ':ls' and you will see that %a and # have changed). 
-:bp     = Opens the PREVIOUS buffer (Alternates: ':bprevious' or ':b#') (Use ':ls' and you will see that %a and # have changed). 
-:bf     = Opens the FIRST buffer (Alternate: ':bfirst').
-:bl     = Opens the LAST buffer (Alternate: ':blast').
+`:ls`     = Displays the buffers and information about the files they hold. (Format: BufferNumber-Flags-FileName)
+
+Note: Flags Inside the buffer listing: 
+  - The current buffer (currently visible file) is marked with `%a`, and 
+  - previously visited file (previous buffer) is marked with a `#`
+
+### Visiting Other buffers:
+
+- `:bn`     = Opens the NEXT buffer (Alternate: ':bnext') (Use ':ls' and you will see that %a and # have changed). 
+- `:bp`     = Opens the PREVIOUS buffer (Alternates: ':bprevious' or ':b#') (Use ':ls' and you will see that %a and # have changed). 
+- `:bf`     = Opens the FIRST buffer (Alternate: ':bfirst').
+- `:bl`     = Opens the LAST buffer (Alternate: ':blast').
 
 Advantage of using buffers: Macros recorded and executed in one can be re-executed in the other buffers as well.
 
-Deleting a buffer:
-:bd<BufferNumber>   = Deletes the file from vim which has the given buffer number associated with it. (Ex: ':bd12')
+### Deleting a buffer:
 
--------------------- "VIM TABS & WINDOWS": (Not available in Vi)
+- `:bd<BufferNumber>`   = Deletes the file from vim which has the given buffer number associated with it. (Ex: `:bd12`)
 
-Managing Multiple Files At Once (TABS):
-:tabe <file>    = Opens a file to edit in a new tab.
-                  (Aternates: ':tabedit <file>' or ':tabnew <file>' or even ':tabnew' followed by ':edit <file>').
-:gt (or) :tabn  = Next Tab (Can also use :tabnext)
-:gT (or) :tabp  = Previous Tab (Can also use :tabprevious)
-:tabm #         = Move current tab to position number # (Zero-indexed). No argument? Move to the end. (Can also use :tabmove)
-:tabo           = Close All Other Tabs.
-:tabc           = Close Current Tab.
-                  (Alternatively, you may close all windows in a tab [using ':q'] to close that particular tab)
+## Vim Tabs and Windows: (Not in Vi)
 
-Managing Multiple Files At Once (SPLIT WINDOWS):
-:vs <file>      = Opens specified file by VERTICALLY splitting the window (Alternate is ':vsplit <file>').
-:sp <file>      = Opens specified file by HORIZONTALLY splitting the window (Alternate is ':split <file>').
+### Managing Multiple Files At Once (TABS):
+
+- `:tabe <file>`    = Opens a file to edit in a new tab.
+                  (Aternates: `:tabedit <file>` or `:tabnew <file>` or even `:tabnew` followed by `:edit <file>`).
+- `:gt` (or) :tabn`  = Next Tab (Can also use :tabnext)
+- `:gT` (or) :tabp`  = Previous Tab (Can also use :tabprevious)
+- `:tabm #`         = Move current tab to position number # (Zero-indexed). No argument? Move to the end. (Can also use - `:tabmove)
+- `:tabo`           = Close All Other Tabs.
+- `:tabc`           = Close Current Tab. (Alternatively, you may close all windows in a tab, using `:q`, o close that particular tab)
+
+### Managing Multiple Files At Once (SPLIT WINDOWS):
+
+- `:vs <file>`      = Opens specified file by VERTICALLY splitting the window (Alternate is ':vsplit <file>').
+- `:sp <file>`      = Opens specified file by HORIZONTALLY splitting the window (Alternate is ':split <file>').
+
 (Note: We can combine horizontal and vertical splits - No problem!)
 
-Moving Between Windows:
-'CTRL-W' + 'l'  = Moves cursor to the RIGHT window.
-'CTRL-W' + 'h'  = Moves cursor to the LEFT window.
-'CTRL-W' + 'j'  = Moves cursor to the BOTTOM window.
-'CTRL-W' + 'k'  = Moves cursor to the TOP window.
+### Moving Between Windows:
+
+- `CTRL-W` + `l`  = Moves cursor to the RIGHT window.
+- `CTRL-W` + `h`  = Moves cursor to the LEFT window.
+- `CTRL-W` + `j`  = Moves cursor to the BOTTOM window.
+- `CTRL-W` + `k`  = Moves cursor to the TOP window.
+
 (In short, we can use the movement keys - hjkl to move up/down and left/right between windows)
 
-Changing Position of a Particular Window: (Or, swapping windows)
-'CTRL-W' + 'L'  = Moves Current Window to the RIGHT END.
-'CTRL-W' + 'H'  = Moves Current Window to the LEFT END.
-'CTRL-W' + 'J'  = Moves Current Window to the BOTTOM END.
-'CTRL-W' + 'K'  = Moves Current Window to the TOP END.
+### Changing Position of a Particular Window: (Or, swapping windows)
 
-Resizing Current Window:
-1. Height:
-'CTRL-W' and then '+'  = Increases height of current window by 1 unit. (To increase by X units, type 'CTRL-W' and then 'X+')
-'CTRL-W' and then '-'  = Decreases height of current window by 1 unit. (To decrease by X units, type 'CTRL-W' and then 'X-')
-2. Width:
-'CTRL-W' and then '>'  = Increases width of current window by 1 unit. (To increase by X units, type 'CTRL-W' and then 'X>')
-'CTRL-W' and then '<'  = Decreases width of current window by 1 unit. (To decrease by X units, type 'CTRL-W' and then 'X<')
-3. Equal Distribution of Height & Width:
-'CTRL-W' and then '='  = Equally distributes height/width between horizontally/vertically split windows.
+- `CTRL-W` + `L`  = Moves Current Window to the RIGHT END.
+- `CTRL-W` + `H`  = Moves Current Window to the LEFT END.
+- `CTRL-W` + `J`  = Moves Current Window to the BOTTOM END.
+- `CTRL-W` + `K`  = Moves Current Window to the TOP END.
+
+### Resizing Current Window:
+
+- `CTRL-W` and then `+`  = Increases height of current window by 1 unit. (To increase by X units, type `CTRL-W` and then `X+`)
+- `CTRL-W` and then `-`  = Decreases height of current window by 1 unit. (To decrease by X units, type `CTRL-W` and then `X-`)
+- `CTRL-W` and then `>`  = Increases width of current window by 1 unit. (To increase by X units, type `CTRL-W` and then `X>`)
+- `CTRL-W` and then `<`  = Decreases width of current window by 1 unit. (To decrease by X units, type `CTRL-W` and then `X<`)
+- `CTRL-W` and then `=`  = Equally distributes height/width between horizontally/vertically split windows.
 
 Closing Windows(Files):
-:q    = Normal way of quitting files.
-(Note:
-Files from the windows we quit still exist in the buffers. (Type ':ls' to confirm).
-To REOPEN a CLOSED FILE/WINDOW as a:
-1. Horizontal split: Type ':sb<buffernumber>'
-2. Vertical split: Type ':vert sb<buffernumber>'
-)
 
-[Note:: We can combine tabs and windows - One tab can have multiple windows - Try it!].
-[Tip: Keep files of similar context open in windows (in same tab) and for files of different contexts, keep them in different tabs].
+- `:q`    = Normal way of quitting files.
 
--------------------- "VIM STRUCTURE":
+Note: Files from the windows we quit still exist in the buffers. (Type `:ls` to confirm).
 
-Vim Directory Structure: (Inside Home Folder ~)
-.vimrc (This is the user settings file)
-.vim/
-    after/  (Another plugins folder - rarely used)
-    syntax/ (Syntax scripts)
-    plugin/ (Store single file plugins here)
-    colors/ (Stores all the colors)
+### To REOPEN a CLOSED FILE/WINDOW as a:
+
+- Horizontal split: Type `:sb<buffernumber>`
+- Vertical split: Type `:vert sb<buffernumber>`
+
+Note: We can combine tabs and windows - One tab can have multiple windows - Try it!
+
+Tip: Keep files of similar context open in windows (in same tab) and for files of different contexts, keep them in different tabs.
+
+## Vim Structure:
+
+### Vim Directory Structure: (Inside Home Folder `~`)
+
+- `.vimrc` (This is the user settings file)
+- `.vim/`
+    - `after/`  (Another plugins folder - rarely used)
+    - `syntax/` (Syntax scripts)
+    - `plugin/` (Store single file plugins here)
+    - `colors/` (Stores all the colors)
     ...
-    bundle/ (Plugins containing multiple files spanning multiple folders are usually installed using pathogen/bundle)
+    - `bundle/` (Plugins containing multiple files spanning multiple folders are usually installed using pathogen/bundle)
 
--------------------- "ABOUT VIM":
+## About Vim:
 
-Check Vim Version: 
-:version    = Shows vim version (Ex: 7.4 Improved)
+`:version`    = Check Vim Version: Shows vim version (Ex: 7.4 Improved)
 
--------------------- "VIM SETTINGS":
+## Vim Settings:
 
-Temporary settings (for current vim session): Use the colon(:) prefixx command (in command mode):
-:<command> <setting-name-and-args>    = Sets a particular rule for the current vim session.
+### Temporary settings (for current vim session): 
 
-Overriding Default Vim Settings (for all files opened by you, the user):
+Use the colon(:) prefixx command (in command mode):
+
+- `:<command> <setting-name-and-args>`    = Sets a particular rule for the current vim session.
+
+### Overriding Default Vim Settings (for all files opened by you, the user):
 (Default settings are stored in /usr/share/vim/vim74/)
 
-Edit the '~/.vimrc' file to have your own user settings for vim.
-(
-On the CLI - 'vim ~/.vimrc',
-Inside Vim - ':edit ~/.vimrc' or ':edit $MYVIMRC' ($MYVIMRC is a global variable representing YOUR .vimrc file)
-)
+Edit the `~/.vimrc` file to have your own user settings for vim.
+
+On the CLI - `vim ~/.vimrc`,
+Inside Vim - `:edit ~/.vimrc` or `:edit $MYVIMRC` ($MYVIMRC is a global variable representing YOUR .vimrc file)
+
 
 We can insert the colon(:) based commands into .vimrc, each command on a new line.
-(Note: 
-1. Do NOT prefix ':' next to command in .vimrc file - since it is not getting invoked immediately.
-2. Use double quotes (") to start a comment from cursor position to End-of-Line in .vimrc file.
-3. Run ':source ~/.vimrc' inside vim for changes made to '~/.vimrc' to take shape [Alternatively, you may close and reopen vim].
-    [':source %' on any current file will make the updates to that file take effect.]
-)
 
-Certain Rules:
-:set number       = Shows the line numbers to the left of every line of the file.
-:syntax on        = Enables syntax coloring while viewing different types of files in Vim.
-:set incsearch    = Vim starts searching for the pattern automatically while you type it.
-:set ignorecase   = Allows for a case-insensitive search (Vim search is case-sensitive by default).
-:set hlsearch     = Highlights all the Words that match the searched pattern.
-:set nohlsearch   = (Opp. of hlsearch) Does not highlight all the matching search words. (Alternately, use ':noh').
-:set nolist       = Vim will NOT print the invisible characters such as new-line, tabs, etc. (Default in Vim)
-:set list         = Vim will print the invisible characters such as new-line, tabs, etc.
+Note: 
+- Do NOT prefix ':' next to command in .vimrc file - since it is not getting invoked immediately.
+- Use double quotes (") to start a comment from cursor position to End-of-Line in .vimrc file.
+- Run ':source ~/.vimrc' inside vim for changes made to '~/.vimrc' to take shape (Alternatively, you may close and reopen vim).
+
+Run `:source %` on any current file will make the updates to that file take effect.
+
+### Certain Rules:
+
+- `:set number`       = Shows the line numbers to the left of every line of the file.
+- `:syntax on`        = Enables syntax coloring while viewing different types of files in Vim.
+- `:set incsearch`    = Vim starts searching for the pattern automatically while you type it.
+- `:set ignorecase`   = Allows for a case-insensitive search (Vim search is case-sensitive by default).
+- `:set hlsearch`     = Highlights all the Words that match the searched pattern.
+- `:set nohlsearch`   = (Opp. of hlsearch) Does not highlight all the matching search words. (Alternately, use ':noh').
+- `:set nolist`       = Vim will NOT print the invisible characters such as new-line, tabs, etc. (Default in Vim)
+- `:set list`         = Vim will print the invisible characters such as new-line, tabs, etc.
                     (Tab by '^I', Newlines by '$' on the screen)
-:set noexpandtab  = Tabs are NOT replaced with spaces (Default in Vim)
-:set expandtab    = Inserts space characters whenever the tab key is pressed (Convert tabs to spaces).
-:set smartindent  = Indentation for new lines based on tabs. (Might be intrusive - careful)
+- `:set noexpandtab`  = Tabs are NOT replaced with spaces (Default in Vim)
+- `:set expandtab`    = Inserts space characters whenever the tab key is pressed (Convert tabs to spaces).
+- `:set smartindent`  = Indentation for new lines based on tabs. (Might be intrusive - careful)
                     (Decides where to place the cursor on the new line w.r.t the indentation of the previous line).
-(Note:
-':set softtabstop=X' (or) ':set sts=X' will set X no. of spaces per tab while typing in INSERT MODE.
+
+Note: `:set softtabstop=X` (or) `:set sts=X` will set X no. of spaces per tab while typing in INSERT MODE.
 This is helpful when a file that's open has different spaces/tab width than what's defined in your vim settings(shiftwidth, default 8).
-) 
 
-Setting an Automatic Fold Method:
-:set fdm=<value>    = Alternate is to use ':set foldmethod=<value>'.
+### Setting an Automatic Fold Method:
 
-Setting filetypes inside vim: (Better to do this inside vim instead of .vimrc since it can have 'syntax on' instead)
-:set ft=javascript    = Syntax highlighting for filetype 'javascript'. Use other file types for other types of files.
+- `:set fdm=<value>`    = Alternate is to use `:set foldmethod=<value>`.
+
+### Setting filetypes inside vim: 
+
+(Better to do this inside vim instead of .vimrc since it can have 'syntax on' instead)
+
+`:set ft=javascript`    = Syntax highlighting for filetype 'javascript'. Use other file types for other types of files.
 (This is usually helpful when vim has opened a new file that it does not recognise the type of.)
 
--------------------- "GVIM":
+## GVim:
 
 Stands for 'Graphical Vim'.
+
 Not available for Mac (Mac instead uses MacVim).
+
 Advantages:
-1. GUI.
-2. Mouse enabled.
-3. Buttons exist for various commands.
+- GUI.
+- Mouse enabled.
+- Buttons exist for various commands.
 
--------------------- "VIM INDENTS AND FOLDS":
+## Vim Indents and Folds:
 
-Some command rules:
-:set nolist       = Vim will NOT print the invisible characters such as new-line, tabs, etc. (Default in Vim)
-:set list         = Vim will print the invisible characters such as new-line, tabs, etc.
-                    (Tab by '^I', Newlines by '$' on the screen)
-:set noexpandtab  = Tabs are NOT replaced with spaces (Default in Vim)
-:set expandtab    = Inserts space characters whenever the tab key is pressed (Convert tabs to spaces).
-                    (Default number of spaces for a tab is = 8)
-:set shiftwidth=X = Changes the number of spaces per tab used to X units when 'expandtab' is enabled.
-                    (Ex: ':set shiftwidth=4')
+### Some command rules:
+
+- `:set nolist`       = Vim will NOT print the invisible characters such as new-line, tabs, etc. (Default in Vim)
+- `:set list`         = Vim will print the invisible characters such as new-line, tabs, etc. (Tab by '^I', Newlines by '$' on the screen)
+- `:set noexpandtab`  = Tabs are NOT replaced with spaces (Default in Vim)
+- `:set expandtab`    = Inserts space characters whenever the tab key is pressed (Convert tabs to spaces). (Default number of spaces for a tab is = 8)
+- `:set shiftwidth=X` = Changes the number of spaces per tab used to X units when 'expandtab' is enabled. (Ex: ':set shiftwidth=4')
 (See more such rules under 'VIM SETTINGS' section).
 
-Tabbing/Indentation(NORMAL MODE):
->>              = This will indent current line to the right by tabs (or, spaces if 'expandtab' is set).
-<<              = This will indent current line to the left by tabs (or, spaces if 'expandtab' is set).
-(Note:
-To indent X lines from current line, press X>> or X<<, whichever side you wish to indent.
-[Ex: '5>>' will indent 5 lines from cursor position to the right.]
-)
+### Tabbing/Indentation(NORMAL MODE):
 
-We can also indent lines inside VISUAL MODE(v):
+`>>`              = This will indent current line to the right by tabs (or, spaces if 'expandtab' is set).
+`<<`              = This will indent current line to the left by tabs (or, spaces if 'expandtab' is set).
+
+Note:
+To indent X lines from current line, press X>> or X<<, whichever side you wish to indent. Ex: `5>>` will indent 5 lines from cursor position to the right.
+
+#### We can also indent lines inside VISUAL MODE(v):
+
 Go to visual mode(v), make a selection and type either:
-'>' for right indent or
-'<' for left indent.
 
-Smart Indentation:
-:set smartindent  = Indentation for new lines based on tabs. (Might be intrusive - careful)
-                    (Decides where to place the cursor on the new line w.r.t the indentation of the previous line).
-(Ex: 
+- `>` for right indent or
+- `<` for left indent.
+
+### Smart Indentation:
+
+- `:set smartindent`  = Indentation for new lines based on tabs. (Might be intrusive - careful) (Decides where to place the cursor on the new line w.r.t the indentation of the previous line).
+
+Example: 
 Moving to a new line under a tabbed line will place you in the same column.
-But, moving to a new line under an 'if(..) {' line will tab you one more time on the new line.)
+But, moving to a new line under an `if(..) {` line will tab you one more time on the new line.
 
-*IMPORTANT*
-A) Automatically Adjust Indentation (Prettify Code):
-Method 1:
-  Visually Select a piece of text(v) and press '='.
-Method 2:
-  When in Normal mode, Press '=' and an UP/DOWN Movement.
-  (Ex: '=3j' will automatically adjust indent of 3 lines down from the cursor)
-B) Adjust Indentation of the ENTIRE FILE (Prettify Completely):
-  Goto Line 1 (gg or :1) & Press '=G' in Normal Mode.
+**IMPORTANT**
 
-Adjusting Indentation when Hitting <TAB> in INSERT MODE:
-Say, you have a file that is indented by 3 spaces/tab. 
-But, on pressing <tab> yourself (in insert mode), 8 spaces are added (or, whatever is specified in 'shiftwidth').
-To change this setting back to 3 spaces for tab in INSERT MODE:
-Go to NORMAL MODE and type ':set softtabstop=3' or ':set sts=3'
+- Automatically Adjust Indentation (Prettify Code):
+  - Method 1:
+          Visually Select a piece of text(v) and press '='.
+  - Method 2:
+          When in Normal mode, Press '=' and an UP/DOWN Movement.
+          
+  (Ex: `=3j` will automatically adjust indent of 3 lines down from the cursor)
+  
+- Adjust Indentation of the ENTIRE FILE (Prettify Completely):
+  Goto Line 1 (`gg` or `:1`) & Press `=G` in Normal Mode.
 
-Indenting in INSERT MODE:
-Press 'CTRL-T' to indent the current line FORWARDS (Adv: Can be done while typing in insert mode).
-Press 'CTRL-D' to indent the current line BACKWARDS (Adv: Can be done while typing in insert mode).
+### Adjusting Indentation when Hitting <TAB> in INSERT MODE:
 
-** VIM FOLDING: **
-1. Create Manual Folds:
-zf<motion>    = Creates a fold from lines chosen by the movement (Ex: 'zf5j' will create fold of 6 lines below including current one).
+Say, you have a file that is indented by 3 spaces/tab. But, on pressing <tab> yourself (in insert mode), 8 spaces are added (or, whatever is specified in 'shiftwidth'). To change this setting back to 3 spaces for tab in INSERT MODE:
+
+- Go to NORMAL MODE and type `:set softtabstop=3` or `:set sts=3`
+
+### Indenting in INSERT MODE:
+
+- Press 'CTRL-T' to indent the current line FORWARDS (Adv: Can be done while typing in insert mode).
+- Press 'CTRL-D' to indent the current line BACKWARDS (Adv: Can be done while typing in insert mode).
+
+### VIM FOLDING:
+
+#### Create Manual Folds:
+
+- `zf<motion>`   = Creates a fold from lines chosen by the movement (Ex: `zf5j` will create fold of 6 lines below including current one).
                 (Folds will be something like '+--  3 lines: function c(a) --' & the line is highlighted).
-zo            = Opens a fold.
-zc            = Closes a fold.
-zd            = Deletes a fold. (Content of fold is not deleted - still exists in expanded/non-fold mode).
-(Ex: Go to a block of code and press 'zf%' it will fold from current line upto the line holding the matching brackets - one fold!)
+- `zo`            = Opens a fold.
+- `zc`            = Closes a fold.
+- `zd`            = Deletes a fold. (Content of fold is not deleted - still exists in expanded/non-fold mode).
 
-2. Toggling Between All the Folds in a File:
-zi            = Opens all folds if closed & closes all folds if they are open (toggle)
-(This can be used to enable/disable existing folds in a file).
+Example: Go to a block of code and press `zf%` it will fold from current line upto the line holding the matching brackets - one fold!
 
-2. Automatic Folding:
-:set fdm=<value>    = An automatic fold method(<value> tells you the type of fold). (Alternate is to use ':set foldmethod=<value>').
-(One of the most common autofold method is:
-':set fdm=syntax' which folds according to the file type.
-)
-(There are other values for auto folding. 
-Ex: ':set fdm=diff' which can be used while comparing two similar files - the common portions of the code are folded. Run ':help foldmethod' for more information
-Ex: ':set fdm=marker' which allows us to define a sequence of opening and closing characters for custom defined folding).
+#### Toggling Between All the Folds in a File:
 
-[Note: 'zC' will NOT ONLY close current fold but all the folds upto the root fold - That is, closes all the nested folds upto outer one.]
+- `zi`            = Opens all folds if closed & closes all folds if they are open (toggle) (This can be used to enable/disable existing folds in a file).
 
-Custom Folding by Setting Markers:
-:set fdm=marker                                           = Set fold method using markers.
-:set foldmarker=<openingsetofchars>,<closingsetofchars>   = Define the markers for folding (Ex: ':set foldmarker={{{,}}}')
-(Go into that fold (Defined by the markers) and press zc or zo or zi etc. to open/close the fold).
-(Note:
-To set a fold comment (appears when closed) => Have a commented line at the beginning of fold: '// <comment> <openingsetofchars> ... '.
-)
+#### Automatic Folding:
 
--------------------- "MORE ~/.VIMRC FILE SETTINGS":
+`:set fdm=<value>`    = An automatic fold method(<value> tells you the type of fold). (Alternate is to use ':set foldmethod=<value>').(One of the most common autofold method is: `:set fdm=syntax` which folds according to the file type.)
 
-Some more settings to save in the .vimrc file: (Remember - DO NOT USE ':' as prefix while placing rules inside .vimrc files)
+There are other values for auto folding.
 
-Comments in .vimrc are denoted by double quote("). [These are single line comments]
+Ex: `:set fdm=diff` which can be used while comparing two similar files - the common portions of the code are folded. Run `:help foldmethod` for more information.
 
-:set nocompatible                   = If there exists a Vim way of doing things that Vi also does then VIM way is always chosen 
-(Better way is the vim way since it is the improved version and has different approaches to execute the same commands.)
+Ex: `:set fdm=marker` which allows us to define a sequence of opening and closing characters for custom defined folding.
 
-:filetype on            = Helps identify files based on their file type.
-:filetype indent on     = Helps indent files based on their type.
-:filetype plugin on     = Helps identify the plugins that work with a filetype.
+Note: `zC` will NOT ONLY close current fold but all the folds upto the root fold - That is, closes all the nested folds upto outer one.
 
-Setting variables in Vim (in ~/.vimrc):
-:let <variable-name> = <value>      (Ex: 'let mapleader = ","')
+#### Custom Folding by Setting Markers:
 
-:syntax enable          = Enables syntax processing.
+- `:set fdm=marker`                                           = Set fold method using markers.
+- `:set foldmarker=<openingsetofchars>,<closingsetofchars>`   = Define the markers for folding (Ex: ':set foldmarker={{{,}}}')
+
+Go into that fold (Defined by the markers) and press `zc` or `zo` or `zi` etc. to open/close the fold.
+
+Note:
+To set a fold comment (appears when closed) => Have a commented line at the beginning of fold: 
+`// <comment> <openingsetofchars> ... `.
+
+## Some More `~/.vimrc` File Settings:
+
+Some useful settings to save in the .vimrc file: 
+(Remember - DO NOT USE ':' as prefix while placing rules inside .vimrc files)
+
+Comments in .vimrc are denoted by double quote("). These are single line comments.
+
+- `:set nocompatible`                   = If there exists a Vim way of doing things that Vi also does then VIM way is always chosen (Better way is the vim way since it is the improved version and has different approaches to execute the same commands.)
+
+- `:filetype on`            = Helps identify files based on their file type.
+- `:filetype indent on`     = Helps indent files based on their type.
+- `:filetype plugin on`     = Helps identify the plugins that work with a filetype.
+
+### Setting variables in Vim (in ~/.vimrc):
+
+- `:let <variable-name> = <value>`     (Ex: let mapleader = ",")
+
+- `:syntax enable`          = Enables syntax processing.
 
 Opinion:
 Setting a foldmethod (Ex. ':set foldmethod=syntax') inside the vimrc file may not be the best since you may want to change fold styles while editing a file.
 
-:set autoindent         = Similar to ':set smartindent' and sets the indentation automatically for a file while typing.
+- `:set autoindent`         = Similar to ':set smartindent' and sets the indentation automatically for a file while typing.
 
-:set hlsearch           = Highlights all the matching terms while searching (& it stays this way until a new pattern is searched)
-:set nohlsearch         = Opposite to 'hlsearch' (Recommend you use this setting).
+- `:set hlsearch`           = Highlights all the matching terms while searching (& it stays this way until a new pattern is searched)
+- `:set nohlsearch`         = Opposite to 'hlsearch' (Recommend you use this setting).
 
-:set fileencoding=utf-8   = Supplying a encoding to this rule will make sure all the characters seen are of that format (recommended).
-:set encoding=utf-8       = Similar to 'fileencoding'. Keep both values the same to maintain consistency.
-(Note:
+- `:set fileencoding=utf-8`   = Supplying a encoding to this rule will make sure all the characters seen are of that format (recommended).
+- `:set encoding=utf-8`       = Similar to 'fileencoding'. Keep both values the same to maintain consistency.
+
+Note:
 'encoding' affects what is displayed,
 'fileencoding' affects what is written to the file - Hence keep both consistent (same values)
-)
 
-:set backspace=<value(s)>   = Somewhat advanced setting - deals with how backspace is used (Run ':h backspace'). 
-(Don't use it till you understand it fully).
+- `:set backspace=<value(s)>`   = Somewhat advanced setting - deals with how backspace is used (Run ':h backspace'). (Don't use it till you understand it fully).
 
-:set tabstop=N                       = N number of visual spaces per TAB.
-:set softtabstop=N                   = N number of visual spaces per TAB while TABBING in INSERT MODE.
-:set expandtab                       = Tabs are converted into spaces (default is 8 spaces/tab).
-:set shiftwidth=N                    = Changes the number of spaces per tab to N number.
+- `:set tabstop=N`                       = N number of visual spaces per TAB.
+- `:set softtabstop=N`                   = N number of visual spaces per TAB while TABBING in INSERT MODE.
+- `:set expandtab`                       = Tabs are converted into spaces (default is 8 spaces/tab).
+- `:set shiftwidth=N`                    = Changes the number of spaces per tab to N number.
 
-:set ignorecase       = Allows for a case-insensitive search (Vim search is case-sensitive by default).
-:set smartcase        = Ignores case as long as you type No Uppercase Letter in your search. 
+- `:set ignorecase`       = Allows for a case-insensitive search (Vim search is case-sensitive by default).
+- `:set smartcase`        = Ignores case as long as you type No Uppercase Letter in your search. 
                         (If you type even one uppercase letter in the search, it becomes a case-sensitive search!)
 
-:set gdefault         = Always subsitutes patterns GLOBALLY - If this rule is set then NO NEED to set the 'g' FLAG during searches(/).
-:set incsearch        = Begins searching while you are typing the pattern in the search command(/).
+- `:set gdefault`         = Always subsitutes patterns GLOBALLY - If this rule is set then NO NEED to set the 'g' FLAG during searches(/).
+- `:set incsearch`        = Begins searching while you are typing the pattern in the search command(/).
 
-:set showmatch        = Highlights the matching Brackets[] / Parentheses() / CurlyBraces{} when one of them is under the cursor.
+- `:set showmatch`        = Highlights the matching Brackets[] / Parentheses() / CurlyBraces{} when one of them is under the cursor.
 
-Some Automatic Window Resizing Commands:
-:set winwidth, :set winheight, :set winminheight, etc. => Google and find out how automatic resizing takes place.
+- `:set list`       = View all the tabs & line endings displayed.
+- `:set nolist`     = Opposite of list (tabs & line endings are hidden). (Default)
 
-:set list       = View all the tabs & line endings displayed.
-:set nolist     = Opposite of list (tabs & line endings are hidden). (Default)
+- `:set number`     = Adds line numbers to the left gutter.
 
-For GUI options (& MacVim): 
+- `:set noswapfile`   = Disables swap files (Learn more about it on your own!)
+
+- `:set visualbell`   = Normally when you are trying to do something wrong in Vim, an alarm is sounded. 
+                    This rule replaces the alarm with a continuous screen flashing.
+
+- `:set cursorline`   = Highlights the line that you are in (Current line / line on which cursor is placed).
+- `:set nocursorline` = Opposite of cursorline (removes it) (Default)
+
+- `set wildmenu`      = Visual autocomplete for command menu.
+- `set showcmd`       = Show last command in right bottom bar (HELPFUL!).
+- `set showmode`      = Shows mode (Insert/Normal/Visual) on the bottom left corner (HELPFUL!).
+
+### Setting Visual Color columns:
+
+Visual color columns appear on the screen on a particular column number. These are just for display and do not affect the text. The use for such columns are to enable the user to indicate a width for each line (For ex: Helpful while writing a blog post and you want to neatly display the text within a fixed layout)
+
+- `:set cc=N`       = Colors the column number N on the screen (Alternate: ':set colorcolumn=N')
+- `:set cc=N,M,O`   = Colors the column number N, M, & O on the screen (Alternate: ':set colorcolumn=N,M,O')
+- `:set cc-=N`      = Removes color column on line N on the screen (Alternate: ':set colorcolumn-=N')
+- `:set cc-=N,M,O`  = Removes color column on lines N, M, & O on the screen (Alternate: ':set colorcolumn-=N,M,O')
+
+- `:set background=dark`            = Sets a dark background for vim
+- `:colorscheme <colorschemename>`  = Applies a color scheme theme (which resides in a file inside "~/.vim/colors/") to Vim.
+
+**Some advanced filetype settings:**
+Learn about the 'au' command/rule from other resources.
+
+### Some Automatic Window Resizing Commands:
+
+`:set winwidth`, `:set winheight`, `:set winminheight`, etc. => Google and find out how automatic resizing takes place.
+
+### For GUI options (& MacVim): 
+
 Refer to the .vimrc file settings video (do not bother unless you are working with them!)
 Ex. Rules: 'guifont', 'guioptions', etc.
 
-:set number     = Adds line numbers to the left gutter.
+## Customizing Vim - Pathogen Tool:
 
-:set noswapfile   = Disables swap files (Learn more about it on your own!)
-
-:set visualbell   = Normally when you are trying to do something wrong in Vim, an alarm is sounded. 
-                    This rule replaces the alarm with a continuous screen flashing.
-
-:set cursorline   = Highlights the line that you are in (Current line / line on which cursor is placed).
-:set nocursorline = Opposite of cursorline (removes it) (Default)
-
-set wildmenu      = Visual autocomplete for command menu.
-set showcmd       = Show last command in right bottom bar (HELPFUL!).
-set showmode      = Shows mode (Insert/Normal/Visual) on the bottom left corner (HELPFUL!).
-
-Setting Visual Color columns:
-Visual color columns appear on the screen on a particular column number.
-These are just for display and do not affect the text.
-The use for such columns are to enable the user to indicate a width for each line (For ex: Helpful while writing a blog post and you want to neatly display the text within a fixed layout)
-:set cc=N       = Colors the column number N on the screen (Alternate: ':set colorcolumn=N')
-:set cc=N,M,O   = Colors the column number N, M, & O on the screen (Alternate: ':set colorcolumn=N,M,O')
-:set cc-=N      = Removes color column on line N on the screen (Alternate: ':set colorcolumn-=N')
-:set cc-=N,M,O  = Removes color column on lines N, M, & O on the screen (Alternate: ':set colorcolumn-=N,M,O')
-
-:set background=dark            = Sets a dark background for vim
-:colorscheme <colorschemename>  = Applies a color scheme theme (which resides in a file inside "~/.vim/colors/") to Vim.
-
-Some advanced filetype settings:
-Learn about the 'au' command/rule on your own.
-
--------------------- "CUSTOMIZING VIM (PATHOGEN TOOL)":
-
-'Pathogen' tool is used to install plugins into vim. 
-Before pathogen, it was really hard to install plugins in vim, 
+'Pathogen' tool is used to install plugins into vim. Before pathogen, it was really hard to install plugins in vim, 
 especially the ones which required certain files to exist in certain folders.
 
-Installing Pathogen (Steps):
-1. Visit https://github.com/tpope/vim-pathogen
-2. Scroll down to the README section and copy+paste the commands specified into Linux/Mac terminal
+### Installing Pathogen (Steps):
+
+- Visit https://github.com/tpope/vim-pathogen
+- Scroll down to the README section and copy+paste the commands specified into Linux/Mac terminal
+
 (Fow Windows - check online)
 
 The copy/pasted commands will do the following:
-a. Create two folders - 'autoload' and 'bundle'.
-b. Copy the 'pathogen.vim' source code into the 'autoload' folder.
+- Create two folders - 'autoload' and 'bundle'.
+- Copy the 'pathogen.vim' source code into the 'autoload' folder.
 
-After Installing Pathogen - We need to add it to our ~/.vimrc file:
-Add this line after all the 'filetype' rules: 
-'call pathogen#infect()' - This is responsible for loading plugins downloaded to '~/.vim/bundle' folder.
+### After Installing Pathogen:
 
-Installing a plugin using pathogen:
+We need to add it to our `~/.vimrc` file:
+Add this line after all the 'filetype' rules: `call pathogen#infect()` - This is responsible for loading plugins downloaded to '~/.vim/bundle' folder.
+
+### Installing a plugin using pathogen:
+
 (This example install 'nerdtree' plugin which is a FILE EXPLORER for Vim.)
-Go to the Vim.org page (or) Github page of the plugin: 
-(Ex: https://github.com/scrooloose/nerdtree)
-Follow the installation guide VIA PATHOGEN in the README of the github pages of the plugin. (Usually a 'git clone' command)
-Nerdtree will be downloaded into a new 'nerdtree' folder inside the '~/.vim/bundle' folder.
 
-Structure of a plugin (Inside ~/.vim/bundle/<plugin>):
-1. /doc        = Contains documentation for the plugin.
-2. /plugin     = Contaisn the code for the plugin itself.
-3. /syntax     = Defines the syntax rules for the various components of the plugin.
-(Apart from these 3 standard folders, other custom folders might exist inside a plugin - which will mostly be triggered from code residing from within the 3 standard folders)
+- Go to the Vim.org page (or) Github page of the plugin: (Ex: https://github.com/scrooloose/nerdtree)
+- Follow the installation guide VIA PATHOGEN in the README of the github pages of the plugin. (Usually a 'git clone' command)
+- Nerdtree will be downloaded into a new 'nerdtree' folder inside the '~/.vim/bundle' folder.
 
-For Nerdtree plugin: 
+### Structure of a plugin (Inside `~/.vim/bundle/<plugin>`):
+
+- /doc        = Contains documentation for the plugin.
+- /plugin     = Contaisn the code for the plugin itself.
+- /syntax     = Defines the syntax rules for the various components of the plugin.
+
+Apart from these 3 standard folders, other custom folders might exist inside a plugin - which will mostly be triggered from code residing from within the 3 standard folders.
+
+### For Nerdtree plugin: 
+
 Open vim or a folder in vim & you will see a file explorer opened - we may scan through the subdirectories & choose files to open.
-1. Opening a folder in nerdtree: press 'o' (Expands the folder)
-2. Close parent folder: Press 'x'
-3. Opening a file in nerdtree: press 'o' (Opens the file in vim)
-4. Go up one folder in nerdtree: press 'q'
-5. Show hidden files of a folder: press 'I' (Toggle action)
 
-Opening the Nerdtree left sidebar while a file is opened:
-':NERDTreeToggle'     = Opens if closed / Closes if opened the nerdtree file explorer sidebar.
-(
+- Opening a folder in nerdtree: press `o` (Expands the folder)
+- Close parent folder: Press `x`
+- Opening a file in nerdtree: press `o` (Opens the file in vim)
+- Go up one folder in nerdtree: press `q`
+- Show hidden files of a folder: press `I` (Toggle action)
+
+### Opening the Nerdtree left sidebar while a file is opened:
+
+- `:NERDTreeToggle`     = Opens if closed / Closes if opened the nerdtree file explorer sidebar.
+
 Moving between nerdtree sidebar and file windows:
 Same way in which you move between various windows in a tab - 'CTRL-W' followed by one of h,j,k, or l
-)
 
-Adding a new file/folder using Nerdtree:
-Press 'm' which opens up a menu.
+### Adding a new file/folder using Nerdtree:
+
+Press `m` which opens up a menu.
 From the menu choose the option to '(a)dd a child node'.
 It will create a file/folder with given name in the current Nerdtree directory.
 
-Moving a file/folder using Nerdtree:
-Press 'm' which opens up a menu.
+### Moving a file/folder using Nerdtree:
+
+Press `m` which opens up a menu.
 From the menu choose the option to '(m)ove the current node'.
 You can now edit the path of the file and the file will be moved to the specified path.
 (Similar steps for copying a file)
 
-Deleting a file/folder using Nerdtree:
-Press 'm' which opens up a menu.
+### Deleting a file/folder using Nerdtree:
+
+Press `m` which opens up a menu.
 From the menu choose the option to '(d)elete the current node'.
 It deletes the current file/folder (file currently pointed to in nerdtree) from the system.
 
-(Nerdtree - very famous plugin and very good!)
-(Many good vim plugins have been created by 'Tim Pope' - https://github.com/tpope)
+Nerdtree - very famous plugin and very good!
 
-Check out these other cool plugins: 'Snipmate' & 'Command-T'.
+Many good vim plugins have been created by 'Tim Pope' - https://github.com/tpope
 
--------------------- "VIM COLOR SCHEMES":
+Check out some other cool plugins: 'Snipmate' & 'Command-T'.
 
-Check the current color scheme:
-:colorscheme      = Returns the current color scheme in use (or, just ':colo')
+## Vim Color Schemes:
 
-Using/Applying a colorscheme:
-:colorscheme <colorschemename>    = Applies the specified colorscheme to Vim. (Alternate: ':colo <colorschemename>')
+### Check the current color scheme:
 
-(NOTE: FOR COLOR SCHEMES THAT ARE "NOT" PLUGINS INSTALLED USING PATHOGEN:
+- `:colorscheme`      = Returns the current color scheme in use (or, just ':colo')
+
+### Using/Applying a colorscheme:
+
+`:colorscheme <colorschemename>`    = Applies the specified colorscheme to Vim. (Alternate: ':colo <colorschemename>')
+
+**FOR COLOR SCHEMES THAT ARE "NOT" PLUGINS INSTALLED USING PATHOGEN**
+
 Vim colorscheme files are stored in '~/.vim/colors' and the <colorschemename> is the name of the specific file in that folder - but excluding the extension (like .vim). Therefore, add such a colorscheme file to the '~/.vim/colors' folder.
-FOR PATHOGEN COLORSHEME PLUGINS - Follow the pathogen way of installing. That is, git clone plugin folder into '~/.vim/bundle'
-).
 
-(Note:
-Type ':colo ' and hit <TAB>.
-It will autocomplete a new colorscheme evey time you hit <TAB>.
-Hit <ENTER> to apply a color scheme (for that session).
-)
+**FOR PATHOGEN COLORSHEME PLUGINS** 
 
-Vim color schemes can have two variants(in-built):
+Follow the pathogen way of installing. That is, git clone plugin folder into '~/.vim/bundle'.
+
+Note: Type `:colo ` and hit `<TAB>`. It will autocomplete a new colorscheme evey time you hit <TAB>. Hit <ENTER> to apply a color scheme (for that session).
+
+### Vim color schemes can have two variants(in-built):
+
 One for 'dark' background and one for 'light'.
 So, we can specify the background like this:
-':set bg=light' (or) ':set bg=dark'     = Sets a light/dark background (You may use 'background' instead of 'bg').
 
-(Note:
-1. Open vim and set a colorscheme. Change background and see if the second variant of the applied color scheme is set.
-(Color will change if the second variant for the color scheme exists)
-2. It is common to save a permanent background and color scheme for all files in vim - 
-Just save the 'bg' & 'colo' rules in your ~?.vimrc.
-)
+- `:set bg=light` (or) `:set bg=dark`     = Sets a light/dark background (You may use 'background' instead of 'bg').
+
+Note:
+
+- Open vim and set a colorscheme. Change background and see if the second variant of the applied color scheme is set. (Color will change if the second variant for the color scheme exists)
+- It is common to save a permanent background and color scheme for all files in vim. Save the 'bg' & 'colo' rules in your ~/.vimrc.
 
 We can edit a colorscheme setting - open the file & change the rules (NOT RECOMMENDED FOR ALREADY EXISTING COLORSCHEMES).
 
-Creating your own colorsheme files (Advanced):
-Refer to/watch this screencast: "http://vimcasts.org/episodes/creating-colorschemes-for-vim/"
+### Creating your own colorsheme files (Advanced):
+
+Refer to/watch this screencast: 
+"http://vimcasts.org/episodes/creating-colorschemes-for-vim/"
 
 ## Vim Mappings and MapLeader:
 
