@@ -33,10 +33,11 @@ NOTE:
 
 ### Vim Modes:
 
-1. Insert Mode (Enter text where cursor is seen)
-2. Normal Mode (Traversing the file and other manipulations) 
-3. Command Mode (Run commands. Mix of different modes and containing other options)
-[Special mode: Visual Mode (Mainly for visibly copying/selection text)]
+- Insert Mode (Enter text where cursor is seen)
+- Normal Mode (Traversing the file and other manipulations) 
+- Command Mode (Run commands. Mix of different modes and containing other options)
+
+Special mode: Visual Mode (Mainly for visibly copying/selection text)
 
 #### Entering Command Mode:
 
@@ -147,14 +148,15 @@ word => Any non-character, WORD => Words separated by spaces.
 - `n`   = Go to the next matched word.
 - `N`   = Go to the previous matched word.
 
-Note: 
-1. Search is **case-sensitive** by default (can be changed in settings)
-2. Search does not wrap-around to the first match when it hits the bottom of the search, by default (can be changed in settings)
-3. We can use Regular Expressions in the search using '/' or '?':
+** Note: **
+
+- Search is **case-sensitive** by default (can be changed in settings)
+- Search does not wrap-around to the first match when it hits the bottom of the search, by default (can be changed in settings)
+- We can use Regular Expressions in the search using '/' or '?':
     Ex: Running '/\n\n' will search for all the blank lines in a file.
         Running '/l[aeiou]' will highlight all the words starting with 'l' followed by a vowel.
-4. We need to use the escape sequence(\) for certain symbols in text while searching (Ex: search /'\/Forward to search for '/Forward)
-5. ':set incsearch' to enable incremental search. That is, Vim starts searching for the term while you are typing it.
+- We need to use the escape sequence(\) for certain symbols in text while searching (Ex: search /'\/Forward to search for '/Forward)
+- `:set incsearch` to enable incremental search. That is, Vim starts searching for the term while you are typing it.
 
 
 ### Substituting/Replacing Text:
@@ -181,20 +183,19 @@ We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon
 
 `:N,Ms/pattern/string/flag`   = Search and Replace pattern with string considering only the text between line number N to M. (Ex: :1,4s/bacon/brocoli/g replaces all instances of bacon with brocoli within lines 1 to 4)
 
-REPLACING WITHIN CODE BLOCKS OR WITHIN FUNCTIIONS MIGHT BE EASILY DONE FROM INSIDE 'VISUAL MODE' - CHECK 'VISUAL MODE TIPS' SECTION.
+** IMPORTANT TIP **
 
-*IMPORTANT TIP*
 - Combining Searching & Replacing (Steps):
     - Search for a term. (Ex: '/fire')
     - Replace the searched term - omit the pattern. (Ex: ':s//flame' - Replaces all the instances of searched word, fire, with flame)
 - Replacing only a PART of the Searched term (Steps):
     - Search for a term normally and insert '\zs' in between.
     - Whatever comes AFTER it in the search is considered in the NEXT Replace command. 
-    (Ex: '/[^ ]\zs(' - This will search for a '(' that is not appearing after any space. 
+    (Ex: `/[^ ]\zs(` - This will search for a '(' that is not appearing after any space. 
           But, only '(' is considered for the next replace since it follows '\zs'. 
           And, only the replaceable portion of search gets highlighted. 
           Ex: '(' gets highlighted.)
-    - Replace the searched term - omit the pattern. (Ex: ':s// (' - Replaces all the instances of searched word, '(', with ' (').
+    - Replace the searched term - omit the pattern. (Ex: `:s// (` - Replaces all the instances of searched word, '(', with ' (').
     - USE '\zs' to make part of search "AFTER IT" to be replaceable in the next replace command
     - USE '\ze' to make part of search "BEFORE IT" to be replaceable in the next replace command
 
@@ -214,9 +215,9 @@ REPLACING WITHIN CODE BLOCKS OR WITHIN FUNCTIIONS MIGHT BE EASILY DONE FROM INSI
                   (Ex: yj, y$, y<up-arrow>, y<right-arrow>, yG, ygg) 
 - `[n]yy`           = Copies the whole current line. Optionally, prefix with a number(n) to repeat the copy action forward that many times.
                   (Ex: '5yy' copies the next 5 lines including the current line)
-- `[n]p`            = Paste copied text (Places after cursor position) [If ENTIRE LINE was copied, it is pasted on the NEXT LINE]
+- `[n]p`            = Paste copied text (Places after cursor position). If ENTIRE LINE was copied, it is pasted on the NEXT LINE.
                   (Optionally, prefixing command with a number(n) will repeat the paste action that many times)
-- `[n]P`            = Paste copied text (Places before cursor position) [If ENTIRE LINE was copied, it is pasted on the PREVIOUS LINE]
+- `[n]P`            = Paste copied text (Places before cursor position). If ENTIRE LINE was copied, it is pasted on the PREVIOUS LINE.
                   (Optionally, prefixing command with a number(n) will repeat the paste action that many times)
 - `v`               = Enters Visual Mode. 
                   (We can use motion commands(w, j, G, etc) and see exactly what text is being selected and then press 'y' to copy it!)
@@ -302,61 +303,62 @@ Make sure you press `<ESC>` upon Inserting/changing text: Because hitting enter 
 
 ### REPLACING TEXT Within a Visually Selected Portion:
 We can make our selection in the usual way in Visual mode and then type the `:s` command normally.
-(Command line will appear like `:'<,'>` => do not worry and continue typing the substitution command.)
 
-*IMPORTANT*
+(Command line will appear something like `:<,>` => No problem. We can continue typing the substitution command.)
 
-1. BlOCK/COLUMN Selection in Visual Mode: (VISUAL BLOCK) 
-(Similar to MULTILINE selection in Sublime) :
-Press 'CTRL-v' and you will end up in visual mode - column/block selection.
-Using the 'j' and 'k' movements will select same columns/blocks in the lines above/below resp.
-Using the 'h and 'l' movements will select adjacent chars to the block from left/right resp.
-(Make sure to press <ESC> upon Inserting/changing text:
-Because hitting enter will be considered as a new line and not end of insertion.
+** IMPORTANT **
+
+- BLOCK/COLUMN Selection in Visual Mode: (VISUAL BLOCK) 
+
+Similar to MULTILINE selection in Sublime:
+Press `CTRL-v` and you will end up in visual mode - column/block selection.
+Using the `j` and `k` movements will select same columns/blocks in the lines above/below resp.
+Using the `h and `l` movements will select adjacent chars to the block from left/right resp.
+(Make sure to press <ESC> upon Inserting/changing text: Because hitting enter will be considered as a new line and not end of insertion.
 In the case of Block selection, there may be a slight delay in inserting/changing all rows of the visual column.
 )
 
-2. TEXT OBJECT SELECTION (VISUAL MODE ONLY):
-Text objects can be Selected in Visual Mode using 'i' or 'a'.
-`i` will contain the 'inside' of a text object. (Ex: text contained inside an html tag)
-`a` will include the beginning and ending characters of the text object as well. (Ex: text + tags)
-   1. Selecting tags:
-        1. `it` will select inside of a tag (say, in html)
-        2. `at` will select the whole tag (say, in html)
-   2. Selecting words:
-        1. `iw` will select inside of a word
-        2. `aw` will select the whole word
-        3. `iW` will select inside of a word (space separated)
-        4. `aW` will select the whole word (space separated)
-   3. Selecting Brackets:
-        1. `i(` and `i(`  [Similarly for `a`]
-        2. `i[` and `i]`  [Similarly for `a`]
-        3. `i{` and `i}`  [Similarly for `a`]
-        4. `i>` and `i<`  [Similarly for `a`]
-   4. Selecting Quotes:
-        `i` followe by &lt;quote&lt; (Single or double quotes)
+- TEXT OBJECT SELECTION (VISUAL MODE ONLY):
 
-Post the selection - We may use the commands to delete, yank, etc.
-We can even delete PRE-Selection - Ex: `dit`
-We can even change PRE-Selection - Ex: `cit`
+Text objects can be Selected in Visual Mode using 'i' or 'a'.
+
+- `i` will contain the 'inside' of a text object. (Ex: text contained inside an html tag)
+- `a` will include the beginning and ending characters of the text object as well. (Ex: text + tags)
+   - Selecting tags:
+        - `it` will select inside of a tag (say, in html)
+        - `at` will select the whole tag (say, in html)
+   - Selecting words:
+        - `iw` will select inside of a word
+        - `aw` will select the whole word
+        - `iW` will select inside of a word (space separated)
+        - `aW` will select the whole word (space separated)
+   - Selecting Brackets:
+        - `i(` and `i(`  [Similarly for `a`]
+        - `i[` and `i]`  [Similarly for `a`]
+        - `i{` and `i}`  [Similarly for `a`]
+        - `i>` and `i<`  [Similarly for `a`]
+   - Selecting Quotes:
+        - `i` followe by &lt;quote&lt; (Single or double quotes)
+
+- Post the selection - We may use the commands to delete, yank, etc.
+   - We can even delete PRE-Selection - Ex: `dit`
+   - We can even change PRE-Selection - Ex: `cit`
 
 ## Macros and Registers:
 
-(Note:
-Pressing 'CTRL-G' will show us information about the file: File-Name, Current-Line, Total-Lines, %-Of-File-Viewed, Column-Number.
-(Use this command to get any of the above listed information.)
-)
+Pressing `CTRL-G` will show us information about the file: File-Name, Current-Line, Total-Lines, %-Of-File-Viewed, Column-Number. (Use this command to get any of the above listed information.)
 
-MACROS - Help us "record" a sequence of commands.
-REGISTERS - Help us store those recorded MACROS.
+- MACROS - Help us **record** a sequence of commands.
+- REGISTERS - Help us store those recorded MACROS.
+
 Together, they can be effectively used to store and repeat the same sequence of commands multiple times.
 
-View Register Names and Values:
-:reg          = Shows you a list of registers with their values. (Note: Values can be overwritten by re-assigning the register).
-                (Alternatively, you can type ':registers').
+### View Register Names and Values:
 
-Start Recording a Macro (Record a Sequence of Commands):
-(Steps)
+-`:reg`          = Shows you a list of registers with their values. (Values can be overwritten by re-assigning the register). (Alternatively, you can type `:registers`).
+
+### Start Recording a Macro (Record a Sequence of Commands):
+
 1. Press 'q' plus a register name (say, 1) and you will see "recording" appear on the bottom of the screen. (Ex: 'q1')
 2. Start typing commands. (Ex: djj^)
 3. Press 'q' again to stop recording. (The sequence of commands have been saved in the mentioned register, that is, register '1').
@@ -828,78 +830,86 @@ We can edit a colorscheme setting - open the file & change the rules (NOT RECOMM
 Creating your own colorsheme files (Advanced):
 Refer to/watch this screencast: "http://vimcasts.org/episodes/creating-colorschemes-for-vim/"
 
--------------------- "VIM MAPPINGS (& MAPLEADER)":
+## Vim Mappings and MapLeader:
 
 Mappings help us assign shortcuts to execute long/complex commands.
 
-Setting a map:
-:map <shortcut-characters> <commandtobereplacedbyshortcut>
-(Ex: 
-':map ,rs :bundle exec rspec' will make sure to run ':bundle exec rspec' command upon seeing the ',rs' shortcut command.
+### Setting a map:
+
+- `:map <shortcut-characters> <commandtobereplacedbyshortcut>`
+
+Ex: `:map ,rs :bundle exec rspec` will make sure to run ':bundle exec rspec' command upon seeing the ',rs' shortcut command.
 In this case, We will see the expanded command in the bottom after pressing the shortcut - Then hit <ENTER> to run that command.
-)
 
 To automatically execute shortcut for a command, we need to add the ENTER key as well to the command:
-:map ,rs :bundle exec rspec<CR>   = The <CR> stands for Enter/Carriage Return key. The above comand gets executed automatically.
-(That is, we will not see the entire command appear at the bottom and we need not hit enter to execute it!)
 
-Executing map shortucts depending on MODE:
-':map ...'    => Executes mapped shortcuts in Normal, Visual & Operator-pending(Not very important) modes.
-':nmap ...'   => Executes mapped shortcuts in Normal mode.
-':nmap ...'   => Executes mapped shortcuts in Normal mode.
-':vmap ...'   => Executes mapped shortcuts in Visual mode.
-':imap ...'   => Executes mapped shortcuts in Insert mode.
-':omap ...'   => Executes mapped shortcuts in Operator-pending mode.
-... etc.
+- `:map ,rs :bundle exec rspec<CR>`   = The <CR> stands for Enter/Carriage Return key. The above comand gets executed automatically. (That is, we will not see the entire command appear at the bottom and we need not hit enter to execute it!)
 
-*IMPORTANT! EXAMPLE: AUTOCOMPLETION IN VIM*
-(Ex: 
-:imap <Tab> <C-n>      = Hitting tab in insert mode will open the context menu (Ctrl(C) followed by n).
-[The context menu will contain text options that will autocomplete the current text that we are typing.]
-)
+### Executing map shortucts depending on MODE:
 
-Key characters used in maps:
-<Tab>   = The Tab key.
-<CR>    = The Enter key.
-<C-n>   = C stands for Control key. So the rule is for holding control and pressing 'n'. 
-(Similarly, we can have any character other than 'n'. Ex: <C-t>, <C-x>, <C-Tab>, etc ...)
-<S-n>   = C stands for Shift key. So the rule is for holding shift and pressing 'n'. 
-(Similarly, we can have any character other than 'n'. Ex: <S-t>, <S-x>, <S-Tab>, etc ...)
+- `:map ....`   = Executes mapped shortcuts in Normal, Visual & Operator-pending(Not very important) modes.
+- `:nmap ...`   = Executes mapped shortcuts in Normal mode.
+- `:nmap ...`   = Executes mapped shortcuts in Normal mode.
+- `:vmap ...`   = Executes mapped shortcuts in Visual mode.
+- `:imap ...`   = Executes mapped shortcuts in Insert mode.
+- `:omap ...`   = Executes mapped shortcuts in Operator-pending mode.... etc.
 
-Recursive & Non-recursive Mapping:
-':remap' is an option that makes mappings work recursively. By default it is on and I'd recommend you leave it that way.
-':map' and ':noremap' are recursive and non-recursive versions of the various mapping commands. 
+**IMPORTANT! EXAMPLE: AUTOCOMPLETION IN VIM**
+
+- `:imap <Tab> <C-n>`      = Hitting tab in insert mode will open the context menu (Ctrl(C) followed by n).
+
+The context menu will contain text options that will autocomplete the current text that we are typing.
+
+### Key characters used in maps:
+
+- `<Tab>`   = The Tab key.
+- `<CR>`    = The Enter key.
+- `<C-n>`   = C stands for Control key. So the rule is for holding control and pressing 'n'. (Similarly, we can have any character other than 'n'. Ex: <C-t>, <C-x>, <C-Tab>, etc ...)
+- `<S-n>`   = C stands for Shift key. So the rule is for holding shift and pressing 'n'. (Similarly, we can have any character other than 'n'. Ex: <S-t>, <S-x>, <S-Tab>, etc ...)
+
+### Recursive & Non-recursive Mapping:
+- `:remap` is an option that makes mappings work **recursively**. By default it's on and it's better you leave it that way.
+- `:map` and `:noremap` are recursive and non-recursive versions of the various mapping commands. 
 
 What that means is that if you do:
-  ':map j gg
-   :map Q j
-   :noremap W j'
+```
+:map j gg
+:map Q j
+:noremap W j
+```
+
 Then 'j' will be mapped to 'gg'. 'Q' will also be mapped to 'gg', because 'j' will be expanded for the recursive mapping. 
 'W' will be mapped to 'j' (and not to gg) because 'j' will not be expanded for the non-recursive mapping.
 
 For each of these sets of mappings (:map and :noremap), there is a mapping that works in Normal, Visual, Select and Operator modes: 
+
 One that works in normal mode (:nmap and :nnoremap), 
+
 One in visual mode (:vmap and :vnoremap) and so on ... !
 
-For help/information on mappings:
-:help map     = Map is actually a function expecting an expression and a string. This function gets executed upon ':map' command.
+### For help/information on mappings:
+- `:help map`     = Map is actually a function expecting an expression and a string. This function gets executed upon ':map' command.
 
--------------------- "FURTHER LEARNING":
+## Further Learning:
 
-Help with Basics:
-'vimtutor' command on the Terminal
-':help' (or) :help <cmd>' inside Vim.
-':help options' - Help with the vimrc options or in-file settings. (List of options available to insert in the vimrc file).
+### Help with Basics:
 
-Excellent places to learn Vim tips (HOW-TOs):
-http://vimcasts.org/episodes
-https://code.tutsplus.com/articles/25-vim-tutorials-screencasts-and-resources--net-14631
-https://vimeo.com/user1690209
+- 'vimtutor' command on the Terminal
+- ':help' (or) :help <cmd>' inside Vim.
+- ':help options' - Help with the vimrc options or in-file settings. (List of options available to insert in the vimrc file).
 
-Most Popular Vim Cheat Sheet:
-http://www.viemu.com/vi-vim-cheat-sheet.gif
+### Excellent places to learn Vim tips (HOW-TOs):
 
-10 Awesome color schemes:
-http://www.vimninjas.com/2012/08/26/10-vim-color-schemes-you-need-to-own
+- http://vimcasts.org/episodes
+- https://code.tutsplus.com/articles/25-vim-tutorials-screencasts-and-resources--net-14631
+- https://vimeo.com/user1690209
 
--------------------- "THE END"
+### Most Popular Vim Cheat Sheet:
+
+- http://www.viemu.com/vi-vim-cheat-sheet.gif
+
+### 10 Awesome color schemes:
+
+- http://www.vimninjas.com/2012/08/26/10-vim-color-schemes-you-need-to-own
+
+** THE END **
