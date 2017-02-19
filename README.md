@@ -166,18 +166,22 @@ word => Any non-character, WORD => Words separated by spaces.
 - `:s/pattern/string`           = Search and replace pattern with string ON THE CURRENT LINE ONLY. (Note that there is NO '%' used) (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
 - `:%s/pattern/string`          = Search and Replace pattern with string THROUGHOUT THE FILE. (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
 
-### Replacing Text Using Flags: Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
-(Flags:
-    - g = Global, replace ALL occurrences of pattern throughout the file (Including the second/third/.. occurences on a line).
-    - c = Confirm replaces. [ y for 'Yes', 
-                            n for 'No', 
-                            a for 'Yes for all remaining matches', 
-                            q or <ESC> for 'Quit substituting',
-                            CTRL-E to 'scroll the screen up', (Not in Vi)
-                            CTRL-Y to 'scroll the screen down' (Not in Vi)]
-    - i = Case-insensitive replacement (Vim replacements are case-sensitive by default).
-    - & = Repeat the last ':s' command.
-) 
+### Replacing Text Using Flags: 
+
+Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
+
+#### Flags:
+
+- `g` = Global, replace ALL occurrences of pattern throughout the file (Including the second/third/.. occurences on a line).
+- `c` = Confirm replaces. 
+          - `y` for 'Yes', 
+          - `n` for 'No', 
+          - `a` for 'Yes for all remaining matches', 
+          - `q` or `<ESC>` for 'Quit substituting',
+          - `CTRL-E` to 'scroll the screen up', (Not in Vi)
+          - `CTRL-Y` to 'scroll the screen down' (Not in Vi)
+ - `i` = Case-insensitive replacement (Vim replacements are case-sensitive by default).
+ - `&` = Repeat the last `:s` command.
 
 We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon with brocoli throughout the file with confirmation for each.
 
