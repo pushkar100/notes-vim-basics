@@ -1,5 +1,5 @@
 # Vim Basics (Short Notes & Quick Reference)
-A Quick reference to Vim commands that contains short explanations on particular functionalities of Vim.
+A Quick reference for Vim commands that contains short explanations on particular functionalities of Vim.
 
 ## Basics
 NOTE:
@@ -173,6 +173,7 @@ Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
 #### Flags:
 
 - `g` = Global, replace ALL occurrences of pattern throughout the file (Including the second/third/.. occurences on a line).
+
 - `c` = Confirm replaces. 
           - `y` for 'Yes', 
           - `n` for 'No', 
@@ -180,7 +181,9 @@ Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
           - `q` or `<ESC>` for 'Quit substituting',
           - `CTRL-E` to 'scroll the screen up', (Not in Vi)
           - `CTRL-Y` to 'scroll the screen down' (Not in Vi)
+          
  - `i` = Case-insensitive replacement (Vim replacements are case-sensitive by default).
+ 
  - `&` = Repeat the last `:s` command.
 
 We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon with brocoli throughout the file with confirmation for each.
@@ -984,9 +987,9 @@ https://github.com/hukl/Smyck-Color-Scheme/blob/master/Smyck.terminal (Open term
 
 ### Help with Basics:
 
-- 'vimtutor' command on the Terminal
-- ':help' (or) :help <cmd>' inside Vim.
-- ':help options' - Help with the vimrc options or in-file settings. (List of options available to insert in the vimrc file).
+- `vimtutor` command on the Terminal
+- `:help` (or) `:help <cmd>` inside Vim.
+- `:help options` help with the vimrc options or in-file settings. (List of options available to insert in the vimrc file).
 
 ### Excellent places to learn Vim tips (HOW-TOs):
 
