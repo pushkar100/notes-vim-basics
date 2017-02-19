@@ -943,6 +943,39 @@ One in visual mode (:vmap and :vnoremap) and so on ... !
 ### For help/information on mappings:
 - `:help map`     = Map is actually a function expecting an expression and a string. This function gets executed upon ':map' command.
 
+### Create and use a Map Leader for Mappings:
+
+VIM MAPLEADER: Choose a key you don't need as a prefix for the map shortcuts: `,` is a good leader key.
+
+- `:let mapleader = ","`
+
+### More Information on Mappings and Mapleader:
+
+- http://learnvimscriptthehardway.stevelosh.com/chapters/06.html
+- https://hashrocket.com/blog/posts/8-great-vim-mappings
+
+
+## Some Useful Vim Plugins:
+
+- Auto Pairs: Insert or delete brackets, parentheses and quotes in pairs. (Source: https://github.com/jiangmiao/auto-pairs)
+
+- Vim Git Gutter: Shows the git diffs (mod/addtn/deltn) in the Left gutter. (Source: https://github.com/airblade/vim-gitgutter)
+
+*Important* (https://github.com/hukl/Smyck-Color-Scheme/) 
+
+Use this vim & terminal color combo:
+
+- Awesome Vim Theme: https://github.com/hukl/Smyck-Color-Scheme/blob/master/smyck.vim (Copy to ~/.vim/colors folder & update to 'colorscheme smyck' in ~/.vimrc)
+
+- Same theme for Bash Terminal (Good combo with the above vim theme):
+https://github.com/hukl/Smyck-Color-Scheme/blob/master/Smyck.terminal (Open terminal preferences and check for import option and import the 'Smyck.terminal' file)
+
+- CTRL-P for fuzzy file search: https://github.com/ctrlpvim/ctrlp.vim
+
+- Nerdtree file explorer: https://github.com/scrooloose/nerdtree
+
+- Vim-airline (The awesome looking status bar for vim): https://codybonney.com/install-vim-airline-using-pathogen/
+
 ## Further Learning:
 
 ### Help with Basics:
