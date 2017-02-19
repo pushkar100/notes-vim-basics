@@ -1,4 +1,4 @@
-# vim-basics-notes
+# Vim Basics (Short Notes & Quick Reference)
 A Quick reference to Vim commands that contains short explanations on particular functionalities of Vim.
 
 ## Basics
@@ -27,9 +27,9 @@ NOTE:
 
 #### Repeat Last Command Given:
 
-.   = Repeats the last command executed in vim (When in Normal mode)
+`.`   = Repeats the last command executed in vim (When in Normal mode)
 
-## MODES:
+## Modes:
 
 ### Vim Modes:
 
@@ -42,227 +42,239 @@ NOTE:
 
 `:`   = Enters command mode from Normal Mode.
 
-Entering Normal Mode:
-Press 'ESC' key (escape) to enter Normal Mode.
-Alternatively: You can also use 'CTRL + [' for the same.
+#### Entering Normal Mode:
 
-(Note:
-Entering Command Mode from Insert Mode => Enter Normal Mode(ESC) and hit ':' [A Colon])
+Press `<ESC>` key (escape) to enter Normal Mode. Alternatively: You can also use `CTRL + [` for the same.
 
--------------------- "INSERTION":
+(Note: Entering Command Mode from Insert Mode => Enter Normal Mode(ESC) and hit ':' [A Colon])
 
-Entering Insert Mode:
-i   = Enter Insert mode at cursor. (The 'i' letter has more uses when it acts as a motion command (Covered Later)).
-I   = Enter Insert mode at first non-blank character on the current line.
-a   = Enter Insert mode after cursor. (Learn more about 'a' motion in command mode (Covered Later))
-A   = Enter Insert mode at the end of the line.
-o   = Enter Insert mode on the next line.
-O   = Enter Insert mode on the above line.
-C   = Delete from cursor to end of line and begin Insert.
-s   = Delete character under cursor and enter Insert mode.
-S   = Delete line and begin Insert at beginning of same line.
+## Insertion:
 
--------------------- "MOVEMENT":
+### Entering Insert Mode:
 
-Scanning Text (Motion):
-h (or) Left Arrow   = Move Left
-k (or) Up Arrow     = Move Up
-l (or) Right Arrow  = Move Right
-j (or) Down Arrow   = Move Down
-(We can combine the movement with an number argument:
-Ex: 3j will move cursor down 3 lines (or 3 + Up Arrow)
+- `i`   = Enter Insert mode at cursor. (The 'i' letter has more uses when it acts as a motion command (Covered Later)).
+- `I`   = Enter Insert mode at first non-blank character on the current line.
+- `a`   = Enter Insert mode after cursor. (Learn more about 'a' motion in command mode (Covered Later))
+- `A`   = Enter Insert mode at the end of the line.
+- `o`   = Enter Insert mode on the next line.
+- `O`   = Enter Insert mode on the above line.
+- `C`   = Delete from cursor to end of line and begin Insert.
+- `s`   = Delete character under cursor and enter Insert mode.
+- `S`   = Delete line and begin Insert at beginning of same line.
 
-Moving to Specific Positions:
-gg  = Moves cursor to the beginning of the document (Beginning of the line number 1).
-G   = Moves cursor to the end of the document (Beginning of the last line).
-:N  = Moves cursor to the beginning of the line number N in the document (Ex: )
-$   = Moves cursor to the end of the current line.
-^   = Moves cursor to the first non-blank character on the current line.
-0   = Move to the 0th character of the current line.
-(Note:
-'Ngg' or 'NG' or ':N'       = All 3 move the cursor to the Nth line of the file (Starting from the top).
+## Movement:
+
+### Scanning Text (Motion):
+
+- `h` (or) Left Arrow   = Move Left
+- `k` (or) Up Arrow     = Move Up
+- `l` (or) Right Arrow  = Move Right
+- `j` (or) Down Arrow   = Move Down
+
+(We can combine the movement with an number argument. Ex: `3j` will move cursor down 3 lines (or 3 + Up Arrow))
+
+### Moving to Specific Positions:
+
+- `gg`  = Moves cursor to the beginning of the document (Beginning of the line number 1).
+- `G`   = Moves cursor to the end of the document (Beginning of the last line).
+- `:N`  = Moves cursor to the beginning of the line number N in the document (Ex: )
+- `$`   = Moves cursor to the end of the current line.
+- `^`   = Moves cursor to the first non-blank character on the current line.
+- `0`   = Move to the 0th character of the current line.
+
+(Note: 'Ngg' or 'NG' or ':N'       = All 3 move the cursor to the Nth line of the file (Starting from the top).
 )
 
-Other Basic Motions (w, b, e):
-w   = Forward to the beginning of the next word.
-W   = Forward to the beginning of the next WORD.
-b   = Backward to the next beginning of a word.
-B   = Backward to the next beginning of a WORD.
-e   = Forward to the next end of a word.
-E   = Forward to the next end of a WORD.
-[word => Any non-character, WORD => Words separated by spaces]
-(Again, we can combine commands with number arguments:
-Ex: 3w will take us to the beginning of the 3rd next word in forward direction)
+### Other Basic Motions (w, b, e):
 
-Slightly Obscure Movements:
-[n]f<character>    = Move cursor forward to specified <character> (Inclusive) (on a line).
-[n]F<character>    = Move cursor backward until specified <character> (Inclusive) (on a line).
-[n]t<character>    = Move cursor forward until specified <character> (Exclusive - stops cursor one position before character) .
-[n]T<character>    = Move cursor backward until specified <character> (Exclusive - stops cursor one position before character).
-(Ex: 'fg' will take cursor to next forward appearance of 'g',
-'3T(' will take the cursor to one position before the 3rd earlier '(' backwards) 
+- `w`   = Forward to the beginning of the next word.
+- `W`   = Forward to the beginning of the next WORD.
+- `b`   = Backward to the next beginning of a word.
+- `B`   = Backward to the next beginning of a WORD.
+- `e`   = Forward to the next end of a word.
+- `E`   = Forward to the next end of a WORD.
 
-Advanced Motions:
-()      = Move cursor between Sentences ('.' Delimited words). ['(' for Previous sentence & ')' for Next sentence]
-{}      = Move cursor between Paragraphs (Next empty line). ['{' for Previous Paragraph & '}' for Next Paragraph]
-[[      = Move cursor to the  beginning of the current section. (A section depends on filetype. Ex: PHP sections are PHP functions).
-]]      = Move cursor to the end of the current section. (A section depends on filetype. Ex: PHP sections are PHP functions).
+word => Any non-character, WORD => Words separated by spaces.
 
-Screen Motions:
-CTRL-D  = Move cursor HALF A SCREEN DOWN.
-CTRL-U  = Move cursor HALF A SCREEN UP.
-CTRL-F  = Move cursor ONE FULL SCREEN DOWN (F for forwards).
-CTRL-B  = Move cursor ONE FULL SCREEN UP (B for backwards).
-M       = Move cursor to the MIDDLE OF THE SCREEN.
-H       = Move cursor to the TOP OF THE SCREEN.
-          (Prefixing a number N will put cursor N lines Below the Top of the Screen. Ex: '3H' will put cursor 3 lines below Top).
-L       = Move cursor to the BOTTOM OF THE SCREEN.
-          (Prefixing a number N will put cursor N lines Above the Bottom of the Screen. Ex: '3L' will put cursor 3 lines above Bottom).
-Screen Motions that DON'T MOVE THE CURSOR:
-zt      = Place Current Line at the TOP of the SCREEN. (Useful for viewing, say, a function() definition).
-zb      = Place Current Line at the BOTTOM of the SCREEN. (Useful for viewing, say, viewing the previous function definition).
-zz      = CENTER the SCREEN.
+(Again, we can combine commands with number arguments. Ex: 3w will take us to the beginning of the 3rd next word in forward direction)
 
--------------------- "SEARCH & REPLACE":
+### Slightly Obscure Movements:
 
-Searching:
-/   = Searches for a word forwards from the cursor (Ex: Type '/Forward' and hit ENTER)
-?   = Searches for a word backwards from cursor (Not really needed when '/' is already there)
-*   = Searches forward for the current word (The entire word the cursor is on) [Bounded]
-#   = Searches backward for the current word (The entire word the cursor is on) [Bounded]
-g*  = Same as * but the search is 'unbounded'. It matches partial words also. 
+- `[n]f<character>`    = Move cursor forward to specified <character> (Inclusive) (on a line).
+- `[n]F<character>`    = Move cursor backward until specified <character> (Inclusive) (on a line).
+- `[n]t<character>`    = Move cursor forward until specified <character> (Exclusive - stops cursor one position before character) .
+- `[n]T<character>`    = Move cursor backward until specified <character> (Exclusive - stops cursor one position before character).
+
+(Ex: 'fg' will take cursor to next forward appearance of 'g', '3T(' will take the cursor to one position before the 3rd earlier '(' backwards) 
+
+### Advanced Motions:
+
+- `()`      = Move cursor between Sentences ('.' Delimited words). ['(' for Previous sentence & ')' for Next sentence]
+- `{}`      = Move cursor between Paragraphs (Next empty line). ['{' for Previous Paragraph & '}' for Next Paragraph]
+- `[[`      = Move cursor to the  beginning of the current section. (A section depends on filetype. Ex: PHP sections are PHP functions).
+- `]]`      = Move cursor to the end of the current section. (A section depends on filetype. Ex: PHP sections are PHP functions).
+
+### Screen Motions:
+
+- `CTRL-D`  = Move cursor HALF A SCREEN DOWN.
+- `CTRL-U`  = Move cursor HALF A SCREEN UP.
+- `CTRL-F`  = Move cursor ONE FULL SCREEN DOWN (F for forwards).
+- `CTRL-B`  = Move cursor ONE FULL SCREEN UP (B for backwards).
+- `M`       = Move cursor to the MIDDLE OF THE SCREEN.
+- `H`       = Move cursor to the TOP OF THE SCREEN. (Prefixing a number N will put cursor N lines Below the Top of the Screen. Ex: '3H' will put cursor 3 lines below Top).
+- `L`       = Move cursor to the BOTTOM OF THE SCREEN. (Prefixing a number N will put cursor N lines Above the Bottom of the Screen. Ex: '3L' will put cursor 3 lines above Bottom).
+          
+### Screen Motions that DON'T MOVE THE CURSOR:
+
+- `zt`      = Place Current Line at the TOP of the SCREEN. (Useful for viewing, say, a function() definition).
+- `zb`      = Place Current Line at the BOTTOM of the SCREEN. (Useful for viewing, say, viewing the previous function definition).
+- `zz`      = CENTER the SCREEN.
+
+## Search and Replace Text:
+
+### Searching:
+
+- `/`   = Searches for a word forwards from the cursor (Ex: Type '/Forward' and hit ENTER)
+- `?`   = Searches for a word backwards from cursor (Not really needed when '/' is already there)
+- `*`   = Searches forward for the current word (The entire word the cursor is on) [Bounded]
+- `#`   = Searches backward for the current word (The entire word the cursor is on) [Bounded]
+- `g`*  = Same as * but the search is 'unbounded'. It matches partial words also. 
       (Ex: * on word 'for' will match 'forward' also - not possible in bounded)
-g#  = Same as # but the search is 'unbounded'. It matches partial words also. 
+- `g`#  = Same as # but the search is 'unbounded'. It matches partial words also. 
       (Ex: # on word 'for' will match 'forward' also - not possible in bounded)
-Traversing through the search matches:
-n   = Go to the next matched word.
-N   = Go to the previous matched word.
+      
+### Traversing through the search matches:
+- `n`   = Go to the next matched word.
+- `N`   = Go to the previous matched word.
 
-(Note: 
-1. Search is case-sensitive by default (can be changed in settings)
+Note: 
+1. Search is **case-sensitive** by default (can be changed in settings)
 2. Search does not wrap-around to the first match when it hits the bottom of the search, by default (can be changed in settings)
 3. We can use Regular Expressions in the search using '/' or '?':
     Ex: Running '/\n\n' will search for all the blank lines in a file.
         Running '/l[aeiou]' will highlight all the words starting with 'l' followed by a vowel.
 4. We need to use the escape sequence(\) for certain symbols in text while searching (Ex: search /'\/Forward to search for '/Forward)
 5. ':set incsearch' to enable incremental search. That is, Vim starts searching for the term while you are typing it.
-)
 
-Substituting/Replacing Text:
-r                           = Replace the current character (The character to the under the cursor).
-R                           = Replace from current cursor position until we tell it to stop (By using ESC to get back to normal mode).
-:s/pattern/string           = Search and replace pattern with string ON THE CURRENT LINE ONLY. (Note that there is NO '%' used)
-                              (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
-:%s/pattern/string          = Search and Replace pattern with string THROUGHOUT THE FILE.
-                              (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
 
-Replacing Text Using Flags: Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
+### Substituting/Replacing Text:
+
+- `r`                           = Replace the current character (The character to the under the cursor).
+- `R`                           = Replace from current cursor position until we tell it to stop (By using ESC to get back to normal mode).
+- `:s/pattern/string`           = Search and replace pattern with string ON THE CURRENT LINE ONLY. (Note that there is NO '%' used) (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
+- `:%s/pattern/string`          = Search and Replace pattern with string THROUGHOUT THE FILE. (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
+
+### Replacing Text Using Flags: Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
 (Flags:
-    g = Global, replace ALL occurrences of pattern throughout the file (Including the second/third/.. occurences on a line).
-    c = Confirm replaces. [ y for 'Yes', 
+    - g = Global, replace ALL occurrences of pattern throughout the file (Including the second/third/.. occurences on a line).
+    - c = Confirm replaces. [ y for 'Yes', 
                             n for 'No', 
                             a for 'Yes for all remaining matches', 
                             q or <ESC> for 'Quit substituting',
                             CTRL-E to 'scroll the screen up', (Not in Vi)
                             CTRL-Y to 'scroll the screen down' (Not in Vi)]
-    i = Case-insensitive replacement (Vim replacements are case-sensitive by default).
-    & = Repeat the last ':s' command.
+    - i = Case-insensitive replacement (Vim replacements are case-sensitive by default).
+    - & = Repeat the last ':s' command.
 ) 
-We may combine flags:
-(Ex: :%s/bacon/brocoli/gc replaces all instances of bacon with brocoli throughout the file with confirmation for each)
 
-:N,Ms/pattern/string/flag   = Search and Replace pattern with string considering only the text between line number N to M.
-                              (Ex: :1,4s/bacon/brocoli/g replaces all instances of bacon with brocoli within lines 1 to 4)
+We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon with brocoli throughout the file with confirmation for each.
+
+`:N,Ms/pattern/string/flag`   = Search and Replace pattern with string considering only the text between line number N to M. (Ex: :1,4s/bacon/brocoli/g replaces all instances of bacon with brocoli within lines 1 to 4)
 
 REPLACING WITHIN CODE BLOCKS OR WITHIN FUNCTIIONS MIGHT BE EASILY DONE FROM INSIDE 'VISUAL MODE' - CHECK 'VISUAL MODE TIPS' SECTION.
 
 *IMPORTANT TIP*
-a) Combining Searching & Replacing (Steps):
-    1. Search for a term. (Ex: '/fire')
-    2. Replace the searched term - omit the pattern. (Ex: ':s//flame' - Replaces all the instances of searched word, fire, with flame)
-b) Replacing only a PART of the Searched term (Steps):
-    1. Search for a term normally and insert '\zs' in between - Whatever comes AFTER it in the search is considered in the NEXT Replace command. 
+- Combining Searching & Replacing (Steps):
+    - Search for a term. (Ex: '/fire')
+    - Replace the searched term - omit the pattern. (Ex: ':s//flame' - Replaces all the instances of searched word, fire, with flame)
+- Replacing only a PART of the Searched term (Steps):
+    - Search for a term normally and insert '\zs' in between.
+    - Whatever comes AFTER it in the search is considered in the NEXT Replace command. 
     (Ex: '/[^ ]\zs(' - This will search for a '(' that is not appearing after any space. 
           But, only '(' is considered for the next replace since it follows '\zs'. 
-          And, only the replaceable portion of search gets highlighted 
-          [Ex: '(' gets highlighted].)
-    2. Replace the searched term - omit the pattern. (Ex: ':s// (' - Replaces all the instances of searched word, '(', with ' (').
-    [USE '\zs' to make part of search "AFTER IT" to be replaceable in the next replace command]
-    [USE '\ze' to make part of search "BEFORE IT" to be replaceable in the next replace command]
+          And, only the replaceable portion of search gets highlighted. 
+          Ex: '(' gets highlighted.)
+    - Replace the searched term - omit the pattern. (Ex: ':s// (' - Replaces all the instances of searched word, '(', with ' (').
+    - USE '\zs' to make part of search "AFTER IT" to be replaceable in the next replace command
+    - USE '\ze' to make part of search "BEFORE IT" to be replaceable in the next replace command
 
--------------------- "UNDO/REDO":
+## Undo and Redo:
 
-Undo/Redo Changes:
-u       = Undo last Action.
-CTRL+R  = Redo last Action.
+### Undo/Redo Changes:
+- `u`       = Undo last Action.
+- `CTRL+R`  = Redo last Action.
 
--------------------- "COPY, PASTE, DELETE & CHANGE":
+## Copy, Paste, Delete and Change:
 
-Copy/Paste Commands:
-[n]y<motion>    = Copy(y) text. Combine y with a motion keyword. Optionally, prefix with a number(n) to repeat action that many times.
+### Copy/Paste Commands:
+
+- `[n]y<motion>`    = Copy(y) text. Combine y with a motion keyword. Optionally, prefix with a number(n) to repeat action that many times.
                   ('yw' copies current word, '3yw' copies 3 words forward from current word, etc.)
                   We can use any motion key with y.
                   (Ex: yj, y$, y<up-arrow>, y<right-arrow>, yG, ygg) 
-[n]yy           = Copies the whole current line. Optionally, prefix with a number(n) to repeat the copy action forward that many times.
+- `[n]yy`           = Copies the whole current line. Optionally, prefix with a number(n) to repeat the copy action forward that many times.
                   (Ex: '5yy' copies the next 5 lines including the current line)
-[n]p            = Paste copied text (Places after cursor position) [If ENTIRE LINE was copied, it is pasted on the NEXT LINE]
+- `[n]p`            = Paste copied text (Places after cursor position) [If ENTIRE LINE was copied, it is pasted on the NEXT LINE]
                   (Optionally, prefixing command with a number(n) will repeat the paste action that many times)
-[n]P            = Paste copied text (Places before cursor position) [If ENTIRE LINE was copied, it is pasted on the PREVIOUS LINE]
+- `[n]P`            = Paste copied text (Places before cursor position) [If ENTIRE LINE was copied, it is pasted on the PREVIOUS LINE]
                   (Optionally, prefixing command with a number(n) will repeat the paste action that many times)
-v               = Enters Visual Mode. 
+- `v`               = Enters Visual Mode. 
                   (We can use motion commands(w, j, G, etc) and see exactly what text is being selected and then press 'y' to copy it!)
                   (Type ESC to return to normal mode and use p or P to paste accordingly.)
+                  
 (Note: p or P work not only for last yanked text(y command) but ALSO for the LAST DELETED TEXT (The d command))
 
-Deleting text:
-[n]d<motion>    = Delete(d) text. Combine d with a motion keyword. Optionally, prefix with a number(n) to repeat action that many times.
+### Deleting text:
+
+- `[n]d<motion>`    = Delete(d) text. Combine d with a motion keyword. Optionally, prefix with a number(n) to repeat action that many times.
                   ('dw' deletes the current word, '3dw' deletes the next 3 words from the current word, etc.)
                   We can use any motion key with d.
                   (Ex: dj, d$, d<up-arrow>, d<right-arrow>, dG, dgg>
-[n]dd           = 'dd' deletes the current line entirely. Optionally, prefix with a number(n) to repeat the delete action that many times forward.
+- `[n]dd`          = 'dd' deletes the current line entirely. Optionally, prefix with a number(n) to repeat the delete action that many times forward.
                   (Ex: '5dd' deletes 5 lines forward including the current line)
-D               = Deletes text from Cursor to the End of the Line when in Normal Mode. (Alternatively: Use 'd$')
-x               = Delete the character to the right of the cursor. 
-X               = Delete the character to the left of the cursor.
+- `D`               = Deletes text from Cursor to the End of the Line when in Normal Mode. (Alternatively: Use 'd$')
+- `x`              = Delete the character to the right of the cursor. 
+- `X`               = Delete the character to the left of the cursor.
+
 (Note: Pressing 'x' continuously keeps deleting the character under the cursor. Hence, it acts like the 'delete' key.)
 
-Changing Text (Instead of Deleting):
-c<motion>       = Replace selection text (from motion). Similar to delete(d) but puts us in 'Insert' Mode to type new text.
-                  (Ex: cw replaces the current word and puts us in insert mode.)
-[n]cc           = Deletes the current line and puts us in insert mode at the beginning of a new line (at the same location).
-                  (Prefixing with a number (n) would delete contents of all lines and put us in insert mode on a new line.)
-(Tip:
-To change all the contents written between quotes("..."):
+### Changing Text (Instead of Deleting):
+
+- `c<motion>`       = Replace selection text (from motion). Similar to delete(d) but puts us in 'Insert' Mode to type new text. (Ex: cw replaces the current word and puts us in insert mode.)
+- `[n]cc`           = Deletes the current line and puts us in insert mode at the beginning of a new line (at the same location). (Prefixing with a number (n) would delete contents of all lines and put us in insert mode on a new line.)
+
+Tip: To change all the contents written between quotes("..."):
 Place the cursor on the first character after the opening quote and press 'ct"' (Without the single quotes wrapped around it).
-)
 
--------------------- "MORE ABOUT THE 'i' MOTION":
+## More About the `i` Motion:
 
-The 'i' command, when it follows another command, stands for 'INSIDE' something.
+The `i` command, when it follows another command, stands for 'INSIDE' something.
 It can be used to move between two similar characters (EXCLUSIVE - Does not include those similar characters):
 That is, 'i' can be used to move in between Quotes("" or ''), Brackets({} or () or []), etc.
 
-Examples:
-di"             = Deletes all characters within double quotes(""). The cursor can be ANYWHERE in BETWEEN the quotes("").
-di{ (or) di}    = Deletes all characters within double quotes({}). The cursor can be ANYWHERE in BETWEEN the quotes({}).
-ci"             = Deletes all characters within double quotes("") and places in 'Insert' mode. 
+### Examples:
+
+- `di"`                 = Deletes all characters within double quotes(""). The cursor can be ANYWHERE in BETWEEN the quotes("").
+- `di{` (or) `di}`      = Deletes all characters within double quotes({}). The cursor can be ANYWHERE in BETWEEN the quotes({}).
+- `ci"`                 = Deletes all characters within double quotes("") and places in 'Insert' mode. 
                   (Again, the cursor can be ANYWHERE in BETWEEN the quotes("").)
-ci( (or) ci)      = Deletes all characters within double quotes("") and places in 'Insert' mode. 
+- `ci(` (or) `ci)`      = Deletes all characters within double quotes("") and places in 'Insert' mode. 
                   (Again, the cursor can be ANYWHERE in BETWEEN the quotes("").)
 
--------------------- "MORE ABOUT THE 'a' MOTION":
+## More About the `a` Motion:
 
-The 'a' command, when it follows another command, stands for 'AROUND' something.
+The `a` command, when it follows another command, stands for 'AROUND' something.
 It is VERY SIMILAR to 'i' when 'i' is used in command mode - Except: it is INCLUSIVE!
 That is, it matches the similar/matching characters also when it is in between them.
 
-Examples to try out:
-da"
-da{ (or) da}
-ca"
-ca( (or) ca)    ... etc!
+### Examples to try out:
 
--------------------- "TRICKS: DELETE/CHANGE/COPY FROM CURSOR TO A SEARCHED WORD":
+- `da"`
+- `da{` (or) `da}`
+- `ca"`
+- `ca(` (or) `ca)`    ... etc!
+
+## Tricks: Delete/Change/Copy from Cursor to a Searched Word:
 
 Press 'd' and then hit '/' to search for a word => This will DELETE from cursor position upto the position of the matched word.
 
@@ -270,30 +282,30 @@ Press 'c' and then hit '/' to search for a word => This will DELETE from cursor 
 
 Press 'y' and then hit '/' to search for a word => This will COPY from cursor position upto the position of the matched word.
 
--------------------- "VISUAL MODE TIPS":
+## Visual Mode Tips:
 
-v           = Goes into Visual mode.
-V           = Goes into Visual mode where we may select complete lines while moving up an down(j,k).
-gv          = Goes into Visual mode and RE-SELECTS the PREVIOUSLY Selected Block.
-%           = Pressing % when in Visual mode will select upto the matching character. Can be used to select entire blocks/functions. 
-              (Ex: Cursor on { and you press % , it will select upto the matching })
-o           = Moves cursor to opposite side of Visual Selection and we can expand selection in other direction (Ex: Using k & j keys).
+- `v`           = Goes into Visual mode.
+- `V`           = Goes into Visual mode where we may select complete lines while moving up an down(j,k).
+- `gv`          = Goes into Visual mode and RE-SELECTS the PREVIOUSLY Selected Block.
+- `%`           = Pressing % when in Visual mode will select upto the matching character. Can be used to select entire blocks/functions. (Ex: Cursor on { and you press % , it will select upto the matching })
+- `o`           = Moves cursor to opposite side of Visual Selection and we can expand selection in other direction (Ex: Using k & j keys).
 
-We can run commands in the visual mode:
-'d' - Deletes selected text (Alternate: 'x')
-'y' - Yanks/Copies selected text
-'c' - Changes the selected text. It goes back to Insert mode and we can change the previously selected visual text.
-'I' - Goes into Insert mode allowing us to insert at the BEGINNING of the selected text.
-'A' - Goes into Insert mode allowing us to insert at the ENDING of the selected text.
-(Make sure to press <ESC> upon Inserting/changing text:
-Because hitting enter will be considered as a new line and not end of insertion.
-)
+### We can run commands in the visual mode:
 
-REPLACING TEXT Within a Visually Selected Portion:
-We can make our selection in the usual way in Visual mode and then type the ':s' command normally.
-(Command line will appear like ":'<,'>" => do not worry and continue typing the substitution command.)
+- `d` = Deletes selected text (Alternate: 'x')
+- `y` = Yanks/Copies selected text
+- `c` = Changes the selected text. It goes back to Insert mode and we can change the previously selected visual text.
+- `I` = Goes into Insert mode allowing us to insert at the BEGINNING of the selected text.
+- `A` = Goes into Insert mode allowing us to insert at the ENDING of the selected text.
+
+Make sure you press `<ESC>` upon Inserting/changing text: Because hitting enter will be considered as a new line and not end of insertion.
+
+### REPLACING TEXT Within a Visually Selected Portion:
+We can make our selection in the usual way in Visual mode and then type the `:s` command normally.
+(Command line will appear like `:'<,'>` => do not worry and continue typing the substitution command.)
 
 *IMPORTANT*
+
 1. BlOCK/COLUMN Selection in Visual Mode: (VISUAL BLOCK) 
 (Similar to MULTILINE selection in Sublime) :
 Press 'CTRL-v' and you will end up in visual mode - column/block selection.
@@ -306,28 +318,29 @@ In the case of Block selection, there may be a slight delay in inserting/changin
 
 2. TEXT OBJECT SELECTION (VISUAL MODE ONLY):
 Text objects can be Selected in Visual Mode using 'i' or 'a'.
-'i' will contain the 'inside' of a text object. (Ex: text contained inside an html tag)
-'a' will include the beginning & ending characters of the text object as well. (Ex: text + tags)
-  (a) Selecting tags:
-        'it' will select inside of a tag (say, in html)
-        'at' will select the whole tag (say, in html)
-  (b) Selecting words:
-        'iw' will select inside of a word
-        'aw' will select the whole word
-        'iW' will select inside of a word (space separated)
-        'aW' will select the whole word (space separated)
-  (c) Selecting Brackets:
-        'i(' and 'i('  [Similarly for 'a']
-        'i[' and 'i]'  [Similarly for 'a']
-        'i{' and 'i}'  [Similarly for 'a']
-        'i>' and 'i<'  [Similarly for 'a']
-  (d) Selecting Quotes:
-        'i"' and 'i''  [Similarly for 'a']
-[Post the selection - We may use the commands to delete, yank, etc.
-We can even delete PRE-Selection - Ex: 'dit'
-We can even change PRE-Selection - Ex: 'cit']
+`i` will contain the 'inside' of a text object. (Ex: text contained inside an html tag)
+`a` will include the beginning and ending characters of the text object as well. (Ex: text + tags)
+   1. Selecting tags:
+        1. `it` will select inside of a tag (say, in html)
+        2. `at` will select the whole tag (say, in html)
+   2. Selecting words:
+        1. `iw` will select inside of a word
+        2. `aw` will select the whole word
+        3. `iW` will select inside of a word (space separated)
+        4. `aW` will select the whole word (space separated)
+   3. Selecting Brackets:
+        1. `i(` and `i(`  [Similarly for `a`]
+        2. `i[` and `i]`  [Similarly for `a`]
+        3. `i{` and `i}`  [Similarly for `a`]
+        4. `i>` and `i<`  [Similarly for `a`]
+   4. Selecting Quotes:
+        `i` followe by &lt;quote&lt; (Single or double quotes)
 
--------------------- "MACROS AND REGISTERS":
+Post the selection - We may use the commands to delete, yank, etc.
+We can even delete PRE-Selection - Ex: `dit`
+We can even change PRE-Selection - Ex: `cit`
+
+## Macros and Registers:
 
 (Note:
 Pressing 'CTRL-G' will show us information about the file: File-Name, Current-Line, Total-Lines, %-Of-File-Viewed, Column-Number.
