@@ -1,0 +1,84 @@
+set nocompatible                    " Vim overrides Vi functionality
+set showmode                        " Shows mode (Insert/Normal/Visual
+set autoindent                      " Tabbing indentation according to file
+
+filetype on                         " Identify files based on filetype
+filetype indent on                  " Indent files based on filetype
+filetype plugin on                  " Identify plugins for a filetype
+
+call pathogen#infect()              " Pathogen - Autoloads all plugins in 'bundle' folder
+
+syntax enable                       " enable syntax processing
+set autoindent                      " Auto indentation for tabbed lines
+set nohlsearch                      " do not highlight all the matched search words
+
+set fileencoding=utf-8              " Set display encoding to utf-8 always.
+set encoding=utf-8                  " Set write to file encoding to utf-8
+
+set tabstop=4                       " number of visual spaces per TAB
+set softtabstop=4                   " number of visual spaces per TAB in INSERT MODE
+set expandtab                       " tabs are converted into spaces(default is 8s/t)
+set shiftwidth=4                    " changes the spaces per tab
+set ignorecase                      " perform case-insensitive searches
+set incsearch                       " start searching while typing pattern
+set showmatch                       " highlight matching [{()}] etc.
+set nolist                          " Does not display tabs & EOL symbols
+set number                          " show line numbers
+set showcmd                         " show last command in right bottom bar
+set cursorline                      " highlight current line
+set wildmenu                        " visual autocomplete for command menu
+
+set updatetime=900                  " Amount of time taken to write to swap file when vim is idle."
+set background=dark                 " Sets the bg to light (applies to colorschemes)
+colorscheme smyck                   " an awesome color scheme
+
+" Allow vim-airline to load up as soon as we start editing a file:
+set laststatus=2
+set t_Co=256
+
+" Temporary settings (Disable arrow keys to encourage using hjkl):
+" Disable arrow keys in normal mode
+no <down> <Nop>     
+no <left> <Nop>
+no <right> <Nop>
+no <up> <Nop>
+" Disable arrow keys in insert mode (Use normal mode to move around - not insert mode!)
+ino <down> <Nop>    
+ino <left> <Nop>
+ino <right> <Nop>
+ino <up> <Nop>
+
+" Setting Map Leader(Prefix for maps):
+let mapleader=","
+
+" Visual mode mappings:
+vnoremap > >gv 
+vnoremap < <gv
+
+" Delete or copy current line quickly:
+nnoremap <leader>d dd
+nnoremap <leader>y yy
+
+" Use shift to change tabs:
+nnoremap <S-l> gt
+nnoremap <S-h> gT
+
+" Use Control & h,j,k,l to quickly change window panes:
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" Quickly save & close files:
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>wq :wq<CR>
+
+" Autocomplete HTML tags:
+:inoremap </ </<C-X><C-O><esc>F<i
+
+" Nerdtreetoggle
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Pasting from clipboard (toggle)
+set pastetoggle=<leader>z
