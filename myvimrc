@@ -75,7 +75,11 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>wq :wq<CR>
 
 " Autocomplete HTML tags:
-:inoremap </ </<C-X><C-O><esc>F<i
+inoremap </ </<C-X><C-O><esc>F<i
+
+" Create blank lines without going into Insert mode:
+nnoremap <leader>o o<esc>           
+nnoremap <leader>O O<esc>
 
 " Nerdtreetoggle
 nnoremap <leader>n :NERDTreeToggle<CR>
