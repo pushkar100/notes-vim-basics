@@ -92,3 +92,6 @@ inoremap <leader>; <esc>A;<esc>
 
 " Make y(yank) and d(delete/cut) commands copy to Mac OS Clipboard (Vim7.4+)
 set clipboard=unnamed
+
+" Allow backspace/delete key to work (Esp. when deleting between lines)
+set backspace=indent,eol,start
