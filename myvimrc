@@ -77,12 +77,18 @@ nnoremap <leader>wq :wq<CR>
 " Autocomplete HTML tags:
 inoremap </ </<C-X><C-O><esc>F<i
 
-" Create blank lines without going into Insert mode:
-nnoremap <leader>o o<esc>           
-nnoremap <leader>O O<esc>
-
 " Nerdtreetoggle
 nnoremap <leader>n :NERDTreeToggle<CR>
 
+" Create blank lines without going into Insert mode:
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
+
 " Pasting from clipboard (toggle)
 set pastetoggle=<leader>z
+
+" Insert Semicolon(;) while typing code without moving to EOL:
+inoremap <leader>; <esc>A;<esc>
+
+" Make y(yank) and d(delete/cut) commands copy to Mac OS Clipboard (Vim7.4+)
+set clipboard=unnamed
