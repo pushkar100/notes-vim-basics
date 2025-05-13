@@ -1,21 +1,148 @@
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Vim Basics (Short Notes & Quick Reference)](#vim-basics-short-notes-quick-reference)
+   * [Basics](#basics)
+      + [Opening Vim Editor:](#opening-vim-editor)
+      + [Help on Commands Usage Inside Vim:](#help-on-commands-usage-inside-vim)
+      + [Saving and Quitting:](#saving-and-quitting)
+         - [Repeat Last Command Given:](#repeat-last-command-given)
+   * [Modes:](#modes)
+      + [Vim Modes:](#vim-modes)
+         - [Entering Command Mode:](#entering-command-mode)
+         - [Entering Normal Mode:](#entering-normal-mode)
+   * [Insertion:](#insertion)
+      + [Entering Insert Mode:](#entering-insert-mode)
+   * [Movement:](#movement)
+      + [Scanning Text (Motion):](#scanning-text-motion)
+      + [Moving to Specific Positions:](#moving-to-specific-positions)
+      + [Other Basic Motions (w, b, e):](#other-basic-motions-w-b-e)
+      + [Slightly Obscure Movements:](#slightly-obscure-movements)
+      + [Advanced Motions:](#advanced-motions)
+      + [Screen Motions:](#screen-motions)
+      + [Screen Motions that DON'T MOVE THE CURSOR:](#screen-motions-that-dont-move-the-cursor)
+   * [Search and Replace Text:](#search-and-replace-text)
+      + [Searching:](#searching)
+      + [Traversing through the search matches:](#traversing-through-the-search-matches)
+      + [Substituting/Replacing Text:](#substitutingreplacing-text)
+      + [Replacing Text Using Flags: ](#replacing-text-using-flags)
+         - [Flags:](#flags)
+   * [Undo and Redo:](#undo-and-redo)
+      + [Undo/Redo Changes:](#undoredo-changes)
+   * [Copy, Paste, Delete and Change:](#copy-paste-delete-and-change)
+      + [Copy/Paste Commands:](#copypaste-commands)
+      + [Deleting text:](#deleting-text)
+      + [Changing Text (Instead of Deleting):](#changing-text-instead-of-deleting)
+   * [More About the `i` Motion:](#more-about-the-i-motion)
+      + [Examples:](#examples)
+   * [More About the `a` Motion:](#more-about-the-a-motion)
+      + [Examples to try out:](#examples-to-try-out)
+   * [Tricks: Delete/Change/Copy from Cursor to a Searched Word:](#tricks-deletechangecopy-from-cursor-to-a-searched-word)
+   * [Visual Mode Tips:](#visual-mode-tips)
+      + [We can run commands in the visual mode:](#we-can-run-commands-in-the-visual-mode)
+      + [REPLACING TEXT Within a Visually Selected Portion:](#replacing-text-within-a-visually-selected-portion)
+   * [Macros and Registers:](#macros-and-registers)
+      + [View Register Names and Values:](#view-register-names-and-values)
+      + [Start Recording a Macro (Record a Sequence of Commands):](#start-recording-a-macro-record-a-sequence-of-commands)
+      + [Running/Repeating the Macros stored in a Register:](#runningrepeating-the-macros-stored-in-a-register)
+      + [Marking & Remembering a Cursor Position using a Register:](#marking-remembering-a-cursor-position-using-a-register)
+   * [Use Command Line Directly From Vim:](#use-command-line-directly-from-vim)
+      + [Copy-Pasting the commands from Terminal:](#copy-pasting-the-commands-from-terminal)
+      + [Sending Text inside Vim to CLI Command as Input Text (Standard input):](#sending-text-inside-vim-to-cli-command-as-input-text-standard-input)
+   * [Autocomplete in Vim:](#autocomplete-in-vim)
+      + [Passing through the Context Menu dropdown:](#passing-through-the-context-menu-dropdown)
+   * [Buffers in Vim:](#buffers-in-vim)
+      + [View the list of open files in vim:](#view-the-list-of-open-files-in-vim)
+      + [Visiting Other buffers:](#visiting-other-buffers)
+      + [Deleting a buffer:](#deleting-a-buffer)
+   * [Vim Tabs and Windows: (Not in Vi)](#vim-tabs-and-windows-not-in-vi)
+      + [Managing Multiple Files At Once (TABS):](#managing-multiple-files-at-once-tabs)
+      + [Managing Multiple Files At Once (SPLIT WINDOWS):](#managing-multiple-files-at-once-split-windows)
+      + [Moving Between Windows:](#moving-between-windows)
+      + [Changing Position of a Particular Window: (Or, swapping windows)](#changing-position-of-a-particular-window-or-swapping-windows)
+      + [Resizing Current Window:](#resizing-current-window)
+      + [To REOPEN a CLOSED FILE/WINDOW as a:](#to-reopen-a-closed-filewindow-as-a)
+   * [Vim Structure:](#vim-structure)
+      + [Vim Directory Structure: (Inside Home Folder `~`)](#vim-directory-structure-inside-home-folder-)
+   * [About Vim:](#about-vim)
+   * [Vim Settings:](#vim-settings)
+      + [Temporary settings (for current vim session): ](#temporary-settings-for-current-vim-session)
+      + [Overriding Default Vim Settings (for all files opened by you, the user):](#overriding-default-vim-settings-for-all-files-opened-by-you-the-user)
+      + [Certain Rules:](#certain-rules)
+      + [Setting an Automatic Fold Method:](#setting-an-automatic-fold-method)
+      + [Setting filetypes inside vim: ](#setting-filetypes-inside-vim)
+   * [GVim:](#gvim)
+   * [Vim Indents and Folds:](#vim-indents-and-folds)
+      + [Some command rules:](#some-command-rules)
+      + [Tabbing/Indentation(NORMAL MODE):](#tabbingindentationnormal-mode)
+         - [We can also indent lines inside VISUAL MODE(v):](#we-can-also-indent-lines-inside-visual-modev)
+      + [Smart Indentation:](#smart-indentation)
+      + [Adjusting Indentation when Hitting <TAB> in INSERT MODE:](#adjusting-indentation-when-hitting-in-insert-mode)
+      + [Indenting in INSERT MODE:](#indenting-in-insert-mode)
+      + [VIM FOLDING:](#vim-folding)
+         - [Create Manual Folds:](#create-manual-folds)
+         - [Toggling Between All the Folds in a File:](#toggling-between-all-the-folds-in-a-file)
+         - [Automatic Folding:](#automatic-folding)
+         - [Custom Folding by Setting Markers:](#custom-folding-by-setting-markers)
+   * [Some More `~/.vimrc` File Settings:](#some-more-vimrc-file-settings)
+      + [Setting variables in Vim (in ~/.vimrc):](#setting-variables-in-vim-in-vimrc)
+      + [Setting Visual Color columns:](#setting-visual-color-columns)
+      + [Some Automatic Window Resizing Commands:](#some-automatic-window-resizing-commands)
+      + [For GUI options (& MacVim): ](#for-gui-options-macvim)
+   * [Customizing Vim - Pathogen Tool:](#customizing-vim-pathogen-tool)
+      + [Installing Pathogen (Steps):](#installing-pathogen-steps)
+      + [After Installing Pathogen:](#after-installing-pathogen)
+      + [Installing a plugin using pathogen:](#installing-a-plugin-using-pathogen)
+      + [Structure of a plugin (Inside `~/.vim/bundle/<plugin>`):](#structure-of-a-plugin-inside-vimbundleplugin)
+      + [For Nerdtree plugin: ](#for-nerdtree-plugin)
+      + [Opening the Nerdtree left sidebar while a file is opened:](#opening-the-nerdtree-left-sidebar-while-a-file-is-opened)
+      + [Adding a new file/folder using Nerdtree:](#adding-a-new-filefolder-using-nerdtree)
+      + [Moving a file/folder using Nerdtree:](#moving-a-filefolder-using-nerdtree)
+      + [Deleting a file/folder using Nerdtree:](#deleting-a-filefolder-using-nerdtree)
+   * [Vim Color Schemes:](#vim-color-schemes)
+      + [Check the current color scheme:](#check-the-current-color-scheme)
+      + [Using/Applying a colorscheme:](#usingapplying-a-colorscheme)
+      + [Vim color schemes can have two variants(in-built):](#vim-color-schemes-can-have-two-variantsin-built)
+      + [Creating your own colorsheme files (Advanced):](#creating-your-own-colorsheme-files-advanced)
+   * [Vim Mappings and MapLeader:](#vim-mappings-and-mapleader)
+      + [Setting a map:](#setting-a-map)
+      + [Executing map shortucts depending on MODE:](#executing-map-shortucts-depending-on-mode)
+      + [Key characters used in maps:](#key-characters-used-in-maps)
+      + [Recursive & Non-recursive Mapping:](#recursive-non-recursive-mapping)
+      + [For help/information on mappings:](#for-helpinformation-on-mappings)
+      + [Create and use a Map Leader for Mappings:](#create-and-use-a-map-leader-for-mappings)
+      + [More Information on Mappings and Mapleader:](#more-information-on-mappings-and-mapleader)
+   * [Some Useful Vim Plugins:](#some-useful-vim-plugins)
+   * [Further Learning:](#further-learning)
+      + [Help with Basics:](#help-with-basics)
+      + [Excellent places to learn Vim tips (HOW-TOs):](#excellent-places-to-learn-vim-tips-how-tos)
+      + [Most Popular Vim Cheat Sheet:](#most-popular-vim-cheat-sheet)
+      + [10 Awesome color schemes:](#10-awesome-color-schemes)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="vim-basics-short-notes-quick-reference"></a>
 # Vim Basics (Short Notes & Quick Reference)
 A Quick reference for Vim commands that contains short explanations on particular functionalities of Vim.
 
+<!-- TOC --><a name="basics"></a>
 ## Basics
 NOTE:
 - [] represents optional parameters.
 - <> represents a certain set of characters like the ones for movement/motion (Ex: <motion> for h,j,k,l,w,$,^,0,... etc!).
 
+<!-- TOC --><a name="opening-vim-editor"></a>
 ### Opening Vim Editor:
 
 - `vim`             = [From CLI] Open a new instance of Vim editor from CLI (No file is specified).
 - `:e filename`     = [From VIM] Open a file from inside the Vim editor. (':e' is short for ':edit')
 - `vim filename`    = [From CLI] Open specified file in Vim from CLI.
 
+<!-- TOC --><a name="help-on-commands-usage-inside-vim"></a>
 ### Help on Commands Usage Inside Vim:
 
 - `:help <command-name>`  (Ex: ':help :s' opens the help pages for the substitute/replace command)
 
+<!-- TOC --><a name="saving-and-quitting"></a>
 ### Saving and Quitting:
 
 - `:w`  = Save the changes (Alternatively, you may use ':write').
@@ -25,12 +152,15 @@ NOTE:
 
 (Note: `:w filename` = If we opened vim without a filename then while saving the changes to it we must specify the new filename.)
 
+<!-- TOC --><a name="repeat-last-command-given"></a>
 #### Repeat Last Command Given:
 
 `.`   = Repeats the last command executed in vim (When in Normal mode)
 
+<!-- TOC --><a name="modes"></a>
 ## Modes:
 
+<!-- TOC --><a name="vim-modes"></a>
 ### Vim Modes:
 
 - Insert Mode (Enter text where cursor is seen)
@@ -39,18 +169,22 @@ NOTE:
 
 Special mode: Visual Mode (Mainly for visibly copying/selection text)
 
+<!-- TOC --><a name="entering-command-mode"></a>
 #### Entering Command Mode:
 
 `:`   = Enters command mode from Normal Mode.
 
+<!-- TOC --><a name="entering-normal-mode"></a>
 #### Entering Normal Mode:
 
 Press `<ESC>` key (escape) to enter Normal Mode. Alternatively: You can also use `CTRL + [` for the same.
 
 (Note: Entering Command Mode from Insert Mode => Enter Normal Mode(ESC) and hit ':' [A Colon])
 
+<!-- TOC --><a name="insertion"></a>
 ## Insertion:
 
+<!-- TOC --><a name="entering-insert-mode"></a>
 ### Entering Insert Mode:
 
 - `i`   = Enter Insert mode at cursor. (The 'i' letter has more uses when it acts as a motion command (Covered Later)).
@@ -63,8 +197,10 @@ Press `<ESC>` key (escape) to enter Normal Mode. Alternatively: You can also use
 - `s`   = Delete character under cursor and enter Insert mode.
 - `S`   = Delete line and begin Insert at beginning of same line.
 
+<!-- TOC --><a name="movement"></a>
 ## Movement:
 
+<!-- TOC --><a name="scanning-text-motion"></a>
 ### Scanning Text (Motion):
 
 - `h` (or) Left Arrow   = Move Left
@@ -74,6 +210,7 @@ Press `<ESC>` key (escape) to enter Normal Mode. Alternatively: You can also use
 
 (We can combine the movement with an number argument. Ex: `3j` will move cursor down 3 lines (or 3 + Up Arrow))
 
+<!-- TOC --><a name="moving-to-specific-positions"></a>
 ### Moving to Specific Positions:
 
 - `gg`  = Moves cursor to the beginning of the document (Beginning of the line number 1).
@@ -86,6 +223,7 @@ Press `<ESC>` key (escape) to enter Normal Mode. Alternatively: You can also use
 (Note: 'Ngg' or 'NG' or ':N'       = All 3 move the cursor to the Nth line of the file (Starting from the top).
 )
 
+<!-- TOC --><a name="other-basic-motions-w-b-e"></a>
 ### Other Basic Motions (w, b, e):
 
 - `w`   = Forward to the beginning of the next word.
@@ -99,6 +237,7 @@ word => Any non-character, WORD => Words separated by spaces.
 
 (Again, we can combine commands with number arguments. Ex: 3w will take us to the beginning of the 3rd next word in forward direction)
 
+<!-- TOC --><a name="slightly-obscure-movements"></a>
 ### Slightly Obscure Movements:
 
 - `[n]f<character>`    = Move cursor forward to specified <character> (Inclusive) (on a line).
@@ -108,6 +247,7 @@ word => Any non-character, WORD => Words separated by spaces.
 
 (Ex: 'fg' will take cursor to next forward appearance of 'g', '3T(' will take the cursor to one position before the 3rd earlier '(' backwards) 
 
+<!-- TOC --><a name="advanced-motions"></a>
 ### Advanced Motions:
 
 - `()`      = Move cursor between Sentences ('.' Delimited words). ['(' for Previous sentence & ')' for Next sentence]
@@ -115,6 +255,7 @@ word => Any non-character, WORD => Words separated by spaces.
 - `[[`      = Move cursor to the  beginning of the current section. (A section depends on filetype. Ex: PHP sections are PHP functions).
 - `]]`      = Move cursor to the end of the current section. (A section depends on filetype. Ex: PHP sections are PHP functions).
 
+<!-- TOC --><a name="screen-motions"></a>
 ### Screen Motions:
 
 - `CTRL-D`  = Move cursor HALF A SCREEN DOWN.
@@ -125,14 +266,17 @@ word => Any non-character, WORD => Words separated by spaces.
 - `H`       = Move cursor to the TOP OF THE SCREEN. (Prefixing a number N will put cursor N lines Below the Top of the Screen. Ex: '3H' will put cursor 3 lines below Top).
 - `L`       = Move cursor to the BOTTOM OF THE SCREEN. (Prefixing a number N will put cursor N lines Above the Bottom of the Screen. Ex: '3L' will put cursor 3 lines above Bottom).
           
+<!-- TOC --><a name="screen-motions-that-dont-move-the-cursor"></a>
 ### Screen Motions that DON'T MOVE THE CURSOR:
 
 - `zt`      = Place Current Line at the TOP of the SCREEN. (Useful for viewing, say, a function() definition).
 - `zb`      = Place Current Line at the BOTTOM of the SCREEN. (Useful for viewing, say, viewing the previous function definition).
 - `zz`      = CENTER the SCREEN.
 
+<!-- TOC --><a name="search-and-replace-text"></a>
 ## Search and Replace Text:
 
+<!-- TOC --><a name="searching"></a>
 ### Searching:
 
 - `/`   = Searches for a word forwards from the cursor (Ex: Type '/Forward' and hit ENTER)
@@ -144,6 +288,7 @@ word => Any non-character, WORD => Words separated by spaces.
 - `g`#  = Same as # but the search is 'unbounded'. It matches partial words also. 
       (Ex: # on word 'for' will match 'forward' also - not possible in bounded)
       
+<!-- TOC --><a name="traversing-through-the-search-matches"></a>
 ### Traversing through the search matches:
 - `n`   = Go to the next matched word.
 - `N`   = Go to the previous matched word.
@@ -159,6 +304,7 @@ word => Any non-character, WORD => Words separated by spaces.
 - `:set incsearch` to enable incremental search. That is, Vim starts searching for the term while you are typing it.
 
 
+<!-- TOC --><a name="substitutingreplacing-text"></a>
 ### Substituting/Replacing Text:
 
 - `r`                           = Replace the current character (The character to the under the cursor).
@@ -166,10 +312,12 @@ word => Any non-character, WORD => Words separated by spaces.
 - `:s/pattern/string`           = Search and replace pattern with string ON THE CURRENT LINE ONLY. (Note that there is NO '%' used) (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
 - `:%s/pattern/string`          = Search and Replace pattern with string THROUGHOUT THE FILE. (BUT ONLY REPLACES THE FIRST OCCURRENCE ON EACH LINE.)
 
+<!-- TOC --><a name="replacing-text-using-flags"></a>
 ### Replacing Text Using Flags: 
 
 Format is either ':s/pattern/string/flag' (or) ':%s/pattern/string/flag'
 
+<!-- TOC --><a name="flags"></a>
 #### Flags:
 
 - `g` = Global, replace ALL occurrences of pattern throughout the file (Including the second/third/.. occurences on a line).
@@ -206,14 +354,18 @@ We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon
     - USE '\zs' to make part of search "AFTER IT" to be replaceable in the next replace command
     - USE '\ze' to make part of search "BEFORE IT" to be replaceable in the next replace command
 
+<!-- TOC --><a name="undo-and-redo"></a>
 ## Undo and Redo:
 
+<!-- TOC --><a name="undoredo-changes"></a>
 ### Undo/Redo Changes:
 - `u`       = Undo last Action.
 - `CTRL+R`  = Redo last Action.
 
+<!-- TOC --><a name="copy-paste-delete-and-change"></a>
 ## Copy, Paste, Delete and Change:
 
+<!-- TOC --><a name="copypaste-commands"></a>
 ### Copy/Paste Commands:
 
 - `[n]y<motion>`    = Copy(y) text. Combine y with a motion keyword. Optionally, prefix with a number(n) to repeat action that many times.
@@ -232,6 +384,7 @@ We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon
                   
 (Note: p or P work not only for last yanked text(y command) but ALSO for the LAST DELETED TEXT (The d command))
 
+<!-- TOC --><a name="deleting-text"></a>
 ### Deleting text:
 
 - `[n]d<motion>`    = Delete(d) text. Combine d with a motion keyword. Optionally, prefix with a number(n) to repeat action that many times.
@@ -246,6 +399,7 @@ We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon
 
 (Note: Pressing 'x' continuously keeps deleting the character under the cursor. Hence, it acts like the 'delete' key.)
 
+<!-- TOC --><a name="changing-text-instead-of-deleting"></a>
 ### Changing Text (Instead of Deleting):
 
 - `c<motion>`       = Replace selection text (from motion). Similar to delete(d) but puts us in 'Insert' Mode to type new text. (Ex: cw replaces the current word and puts us in insert mode.)
@@ -254,12 +408,14 @@ We may combine flags. Ex: `:%s/bacon/brocoli/gc` replaces all instances of bacon
 Tip: To change all the contents written between quotes("..."):
 Place the cursor on the first character after the opening quote and press 'ct"' (Without the single quotes wrapped around it).
 
+<!-- TOC --><a name="more-about-the-i-motion"></a>
 ## More About the `i` Motion:
 
 The `i` command, when it follows another command, stands for 'INSIDE' something.
 It can be used to move between two similar characters (EXCLUSIVE - Does not include those similar characters):
 That is, 'i' can be used to move in between Quotes("" or ''), Brackets({} or () or []), etc.
 
+<!-- TOC --><a name="examples"></a>
 ### Examples:
 
 - `di"`                 = Deletes all characters within double quotes(""). The cursor can be ANYWHERE in BETWEEN the quotes("").
@@ -269,12 +425,14 @@ That is, 'i' can be used to move in between Quotes("" or ''), Brackets({} or () 
 - `ci(` (or) `ci)`      = Deletes all characters within double quotes("") and places in 'Insert' mode. 
                   (Again, the cursor can be ANYWHERE in BETWEEN the quotes("").)
 
+<!-- TOC --><a name="more-about-the-a-motion"></a>
 ## More About the `a` Motion:
 
 The `a` command, when it follows another command, stands for 'AROUND' something.
 It is VERY SIMILAR to 'i' when 'i' is used in command mode - Except: it is INCLUSIVE!
 That is, it matches the similar/matching characters also when it is in between them.
 
+<!-- TOC --><a name="examples-to-try-out"></a>
 ### Examples to try out:
 
 - `da"`
@@ -282,6 +440,7 @@ That is, it matches the similar/matching characters also when it is in between t
 - `ca"`
 - `ca(` (or) `ca)`    ... etc!
 
+<!-- TOC --><a name="tricks-deletechangecopy-from-cursor-to-a-searched-word"></a>
 ## Tricks: Delete/Change/Copy from Cursor to a Searched Word:
 
 Press 'd' and then hit '/' to search for a word => This will DELETE from cursor position upto the position of the matched word.
@@ -290,6 +449,7 @@ Press 'c' and then hit '/' to search for a word => This will DELETE from cursor 
 
 Press 'y' and then hit '/' to search for a word => This will COPY from cursor position upto the position of the matched word.
 
+<!-- TOC --><a name="visual-mode-tips"></a>
 ## Visual Mode Tips:
 
 - `v`           = Goes into Visual mode.
@@ -298,6 +458,7 @@ Press 'y' and then hit '/' to search for a word => This will COPY from cursor po
 - `%`           = Pressing % when in Visual mode will select upto the matching character. Can be used to select entire blocks/functions. (Ex: Cursor on { and you press % , it will select upto the matching })
 - `o`           = Moves cursor to opposite side of Visual Selection and we can expand selection in other direction (Ex: Using k & j keys).
 
+<!-- TOC --><a name="we-can-run-commands-in-the-visual-mode"></a>
 ### We can run commands in the visual mode:
 
 - `d` = Deletes selected text (Alternate: 'x')
@@ -308,6 +469,7 @@ Press 'y' and then hit '/' to search for a word => This will COPY from cursor po
 
 Make sure you press `<ESC>` upon Inserting/changing text: Because hitting enter will be considered as a new line and not end of insertion.
 
+<!-- TOC --><a name="replacing-text-within-a-visually-selected-portion"></a>
 ### REPLACING TEXT Within a Visually Selected Portion:
 We can make our selection in the usual way in Visual mode and then type the `:s` command normally.
 
@@ -351,6 +513,7 @@ Text objects can be Selected in Visual Mode using 'i' or 'a'.
    - We can even delete PRE-Selection - Ex: `dit`
    - We can even change PRE-Selection - Ex: `cit`
 
+<!-- TOC --><a name="macros-and-registers"></a>
 ## Macros and Registers:
 
 Pressing `CTRL-G` will show us information about the file: File-Name, Current-Line, Total-Lines, %-Of-File-Viewed, Column-Number. (Use this command to get any of the above listed information.)
@@ -360,22 +523,26 @@ Pressing `CTRL-G` will show us information about the file: File-Name, Current-Li
 
 Together, they can be effectively used to store and repeat the same sequence of commands multiple times.
 
+<!-- TOC --><a name="view-register-names-and-values"></a>
 ### View Register Names and Values:
 
 -`:reg`          = Shows you a list of registers with their values. (Values can be overwritten by re-assigning the register). (Alternatively, you can type `:registers`).
 
+<!-- TOC --><a name="start-recording-a-macro-record-a-sequence-of-commands"></a>
 ### Start Recording a Macro (Record a Sequence of Commands):
 
 - Press `q` plus a register name (say, 1) and you will see **recording** appear on the bottom of the screen. (Ex: `q1`)
 - Start typing commands. (Ex: `djj^`)
 - Press `q` again to stop recording. (The sequence of commands have been saved in the mentioned register, that is, register `1`).
 
+<!-- TOC --><a name="runningrepeating-the-macros-stored-in-a-register"></a>
 ### Running/Repeating the Macros stored in a Register:
 
 - To run a macro once: Type `@` followed by the register name (Ex: `@1` will execute the macro stored in register 1).
 - To run a previously executed macro: Type `@@` (Ex: `@@` will execute the last macro that was executed from a register).
 - To executed a macro multiple times: Prefix the execution with a Number (Ex: `10@a` will execute macro stored in register `a` 10 times).
 
+<!-- TOC --><a name="marking-remembering-a-cursor-position-using-a-register"></a>
 ### Marking & Remembering a Cursor Position using a Register:
 
 - Type `m` followed by register name. This will remember the position of cursor. (Ex: `m1`)
@@ -383,14 +550,17 @@ Together, they can be effectively used to store and repeat the same sequence of 
 
 (Note: Press single quote twice Ex: `''` to go back to last marked cursor position.)
 
+<!-- TOC --><a name="use-command-line-directly-from-vim"></a>
 ## Use Command Line Directly From Vim:
 
 - `:!<CLIcommand>`      = Executes any Command-Line Interface(CLI) Command. The results are shown on the Terminal & a prompt to return to Vim is shown.
 
+<!-- TOC --><a name="copy-pasting-the-commands-from-terminal"></a>
 ### Copy-Pasting the commands from Terminal:
 
 - `:r !<CLI-command>`  = Copies the results of the executed CLI command and pastes it inside current file under the cursor (New line). Alternatively, you can also use `:read !<CLI-command>`).
 
+<!-- TOC --><a name="sending-text-inside-vim-to-cli-command-as-input-text-standard-input"></a>
 ### Sending Text inside Vim to CLI Command as Input Text (Standard input):
 
 - Make a selection for input in Visual Mode.
@@ -406,21 +576,25 @@ Another Example:
 
 Visually copy haml code and run `:<','>!haml -s` to convert haml to js and replace the former text.)
 
+<!-- TOC --><a name="autocomplete-in-vim"></a>
 ## Autocomplete in Vim:
 
 Pressing `<ctrl-n>` will open up the autocomplete/context dropdown while typing something in INSERT Mode.
 This context menu feature can be used to autocomplete function names/object properties/variables/etc. appearing in the file.
 
+<!-- TOC --><a name="passing-through-the-context-menu-dropdown"></a>
 ### Passing through the Context Menu dropdown:
 - `<ctrl-n>` goes downwards.
 - `<ctrl-p>` goes upwards.
 
 (We can replace `<ctrl-n>` with another character, like <Tab>, which is easier to use - See Mappings section for shortcuts.)
 
+<!-- TOC --><a name="buffers-in-vim"></a>
 ## Buffers in Vim:
 
 Buffers are special places in memory that store information about the files that are open in Vim. Each file opened in vim is allocated a buffer of its own. (Ex: Opening vim with `vim single.js index.html` will actually open two files(buffers) but we see only one at a time.)
 
+<!-- TOC --><a name="view-the-list-of-open-files-in-vim"></a>
 ### View the list of open files in vim:
 
 `:ls`     = Displays the buffers and information about the files they hold. (Format: BufferNumber-Flags-FileName)
@@ -429,6 +603,7 @@ Note: Flags Inside the buffer listing:
   - The current buffer (currently visible file) is marked with `%a`, and 
   - previously visited file (previous buffer) is marked with a `#`
 
+<!-- TOC --><a name="visiting-other-buffers"></a>
 ### Visiting Other buffers:
 
 - `:bn`     = Opens the NEXT buffer (Alternate: ':bnext') (Use ':ls' and you will see that %a and # have changed). 
@@ -438,12 +613,15 @@ Note: Flags Inside the buffer listing:
 
 Advantage of using buffers: Macros recorded and executed in one can be re-executed in the other buffers as well.
 
+<!-- TOC --><a name="deleting-a-buffer"></a>
 ### Deleting a buffer:
 
 - `:bd<BufferNumber>`   = Deletes the file from vim which has the given buffer number associated with it. (Ex: `:bd12`)
 
+<!-- TOC --><a name="vim-tabs-and-windows-not-in-vi"></a>
 ## Vim Tabs and Windows: (Not in Vi)
 
+<!-- TOC --><a name="managing-multiple-files-at-once-tabs"></a>
 ### Managing Multiple Files At Once (TABS):
 
 - `:tabe <file>`    = Opens a file to edit in a new tab.
@@ -454,6 +632,7 @@ Advantage of using buffers: Macros recorded and executed in one can be re-execut
 - `:tabo`           = Close All Other Tabs.
 - `:tabc`           = Close Current Tab. (Alternatively, you may close all windows in a tab, using `:q`, o close that particular tab)
 
+<!-- TOC --><a name="managing-multiple-files-at-once-split-windows"></a>
 ### Managing Multiple Files At Once (SPLIT WINDOWS):
 
 - `:vs <file>`      = Opens specified file by VERTICALLY splitting the window (Alternate is ':vsplit <file>').
@@ -461,6 +640,7 @@ Advantage of using buffers: Macros recorded and executed in one can be re-execut
 
 (Note: We can combine horizontal and vertical splits - No problem!)
 
+<!-- TOC --><a name="moving-between-windows"></a>
 ### Moving Between Windows:
 
 - `CTRL-W` + `l`  = Moves cursor to the RIGHT window.
@@ -470,6 +650,7 @@ Advantage of using buffers: Macros recorded and executed in one can be re-execut
 
 (In short, we can use the movement keys - hjkl to move up/down and left/right between windows)
 
+<!-- TOC --><a name="changing-position-of-a-particular-window-or-swapping-windows"></a>
 ### Changing Position of a Particular Window: (Or, swapping windows)
 
 - `CTRL-W` + `L`  = Moves Current Window to the RIGHT END.
@@ -477,6 +658,7 @@ Advantage of using buffers: Macros recorded and executed in one can be re-execut
 - `CTRL-W` + `J`  = Moves Current Window to the BOTTOM END.
 - `CTRL-W` + `K`  = Moves Current Window to the TOP END.
 
+<!-- TOC --><a name="resizing-current-window"></a>
 ### Resizing Current Window:
 
 - `CTRL-W` and then `+`  = Increases height of current window by 1 unit. (To increase by X units, type `CTRL-W` and then `X+`)
@@ -491,6 +673,7 @@ Closing Windows(Files):
 
 Note: Files from the windows we quit still exist in the buffers. (Type `:ls` to confirm).
 
+<!-- TOC --><a name="to-reopen-a-closed-filewindow-as-a"></a>
 ### To REOPEN a CLOSED FILE/WINDOW as a:
 
 - Horizontal split: Type `:sb<buffernumber>`
@@ -500,8 +683,10 @@ Note: We can combine tabs and windows - One tab can have multiple windows - Try 
 
 Tip: Keep files of similar context open in windows (in same tab) and for files of different contexts, keep them in different tabs.
 
+<!-- TOC --><a name="vim-structure"></a>
 ## Vim Structure:
 
+<!-- TOC --><a name="vim-directory-structure-inside-home-folder-"></a>
 ### Vim Directory Structure: (Inside Home Folder `~`)
 
 - `.vimrc` (This is the user settings file)
@@ -513,18 +698,22 @@ Tip: Keep files of similar context open in windows (in same tab) and for files o
     ...
     - `bundle/` (Plugins containing multiple files spanning multiple folders are usually installed using pathogen/bundle)
 
+<!-- TOC --><a name="about-vim"></a>
 ## About Vim:
 
 `:version`    = Check Vim Version: Shows vim version (Ex: 7.4 Improved)
 
+<!-- TOC --><a name="vim-settings"></a>
 ## Vim Settings:
 
+<!-- TOC --><a name="temporary-settings-for-current-vim-session"></a>
 ### Temporary settings (for current vim session): 
 
 Use the colon(:) prefixx command (in command mode):
 
 - `:<command> <setting-name-and-args>`    = Sets a particular rule for the current vim session.
 
+<!-- TOC --><a name="overriding-default-vim-settings-for-all-files-opened-by-you-the-user"></a>
 ### Overriding Default Vim Settings (for all files opened by you, the user):
 (Default settings are stored in /usr/share/vim/vim74/)
 
@@ -543,6 +732,7 @@ Note:
 
 Run `:source %` on any current file will make the updates to that file take effect.
 
+<!-- TOC --><a name="certain-rules"></a>
 ### Certain Rules:
 
 - `:set number`       = Shows the line numbers to the left of every line of the file.
@@ -562,10 +752,12 @@ Run `:source %` on any current file will make the updates to that file take effe
 Note: `:set softtabstop=X` (or) `:set sts=X` will set X no. of spaces per tab while typing in INSERT MODE.
 This is helpful when a file that's open has different spaces/tab width than what's defined in your vim settings(shiftwidth, default 8).
 
+<!-- TOC --><a name="setting-an-automatic-fold-method"></a>
 ### Setting an Automatic Fold Method:
 
 - `:set fdm=<value>`    = Alternate is to use `:set foldmethod=<value>`.
 
+<!-- TOC --><a name="setting-filetypes-inside-vim"></a>
 ### Setting filetypes inside vim: 
 
 (Better to do this inside vim instead of .vimrc since it can have 'syntax on' instead)
@@ -573,6 +765,7 @@ This is helpful when a file that's open has different spaces/tab width than what
 `:set ft=javascript`    = Syntax highlighting for filetype 'javascript'. Use other file types for other types of files.
 (This is usually helpful when vim has opened a new file that it does not recognise the type of.)
 
+<!-- TOC --><a name="gvim"></a>
 ## GVim:
 
 Stands for 'Graphical Vim'.
@@ -584,8 +777,10 @@ Advantages:
 - Mouse enabled.
 - Buttons exist for various commands.
 
+<!-- TOC --><a name="vim-indents-and-folds"></a>
 ## Vim Indents and Folds:
 
+<!-- TOC --><a name="some-command-rules"></a>
 ### Some command rules:
 
 - `:set nolist`       = Vim will NOT print the invisible characters such as new-line, tabs, etc. (Default in Vim)
@@ -595,6 +790,7 @@ Advantages:
 - `:set shiftwidth=X` = Changes the number of spaces per tab used to X units when 'expandtab' is enabled. (Ex: ':set shiftwidth=4')
 (See more such rules under 'VIM SETTINGS' section).
 
+<!-- TOC --><a name="tabbingindentationnormal-mode"></a>
 ### Tabbing/Indentation(NORMAL MODE):
 
 `>>`              = This will indent current line to the right by tabs (or, spaces if 'expandtab' is set).
@@ -603,6 +799,7 @@ Advantages:
 Note:
 To indent X lines from current line, press X>> or X<<, whichever side you wish to indent. Ex: `5>>` will indent 5 lines from cursor position to the right.
 
+<!-- TOC --><a name="we-can-also-indent-lines-inside-visual-modev"></a>
 #### We can also indent lines inside VISUAL MODE(v):
 
 Go to visual mode(v), make a selection and type either:
@@ -610,6 +807,7 @@ Go to visual mode(v), make a selection and type either:
 - `>` for right indent or
 - `<` for left indent.
 
+<!-- TOC --><a name="smart-indentation"></a>
 ### Smart Indentation:
 
 - `:set smartindent`  = Indentation for new lines based on tabs. (Might be intrusive - careful) (Decides where to place the cursor on the new line w.r.t the indentation of the previous line).
@@ -631,19 +829,23 @@ But, moving to a new line under an `if(..) {` line will tab you one more time on
 - Adjust Indentation of the ENTIRE FILE (Prettify Completely):
   Goto Line 1 (`gg` or `:1`) & Press `=G` in Normal Mode.
 
+<!-- TOC --><a name="adjusting-indentation-when-hitting-in-insert-mode"></a>
 ### Adjusting Indentation when Hitting <TAB> in INSERT MODE:
 
 Say, you have a file that is indented by 3 spaces/tab. But, on pressing <tab> yourself (in insert mode), 8 spaces are added (or, whatever is specified in 'shiftwidth'). To change this setting back to 3 spaces for tab in INSERT MODE:
 
 - Go to NORMAL MODE and type `:set softtabstop=3` or `:set sts=3`
 
+<!-- TOC --><a name="indenting-in-insert-mode"></a>
 ### Indenting in INSERT MODE:
 
 - Press 'CTRL-T' to indent the current line FORWARDS (Adv: Can be done while typing in insert mode).
 - Press 'CTRL-D' to indent the current line BACKWARDS (Adv: Can be done while typing in insert mode).
 
+<!-- TOC --><a name="vim-folding"></a>
 ### VIM FOLDING:
 
+<!-- TOC --><a name="create-manual-folds"></a>
 #### Create Manual Folds:
 
 - `zf<motion>`   = Creates a fold from lines chosen by the movement (Ex: `zf5j` will create fold of 6 lines below including current one).
@@ -654,10 +856,12 @@ Say, you have a file that is indented by 3 spaces/tab. But, on pressing <tab> yo
 
 Example: Go to a block of code and press `zf%` it will fold from current line upto the line holding the matching brackets - one fold!
 
+<!-- TOC --><a name="toggling-between-all-the-folds-in-a-file"></a>
 #### Toggling Between All the Folds in a File:
 
 - `zi`            = Opens all folds if closed & closes all folds if they are open (toggle) (This can be used to enable/disable existing folds in a file).
 
+<!-- TOC --><a name="automatic-folding"></a>
 #### Automatic Folding:
 
 `:set fdm=<value>`    = An automatic fold method(<value> tells you the type of fold). (Alternate is to use ':set foldmethod=<value>').(One of the most common autofold method is: `:set fdm=syntax` which folds according to the file type.)
@@ -670,6 +874,7 @@ Ex: `:set fdm=marker` which allows us to define a sequence of opening and closin
 
 Note: `zC` will NOT ONLY close current fold but all the folds upto the root fold - That is, closes all the nested folds upto outer one.
 
+<!-- TOC --><a name="custom-folding-by-setting-markers"></a>
 #### Custom Folding by Setting Markers:
 
 - `:set fdm=marker`                                           = Set fold method using markers.
@@ -681,6 +886,7 @@ Note:
 To set a fold comment (appears when closed) => Have a commented line at the beginning of fold: 
 `// <comment> <openingsetofchars> ... `.
 
+<!-- TOC --><a name="some-more-vimrc-file-settings"></a>
 ## Some More `~/.vimrc` File Settings:
 
 Some useful settings to save in the .vimrc file: 
@@ -694,6 +900,7 @@ Comments in .vimrc are denoted by double quote("). These are single line comment
 - `:filetype indent on`     = Helps indent files based on their type.
 - `:filetype plugin on`     = Helps identify the plugins that work with a filetype.
 
+<!-- TOC --><a name="setting-variables-in-vim-in-vimrc"></a>
 ### Setting variables in Vim (in ~/.vimrc):
 
 - `:let <variable-name> = <value>`     (Ex: let mapleader = ",")
@@ -748,6 +955,7 @@ Note:
 - `set showcmd`       = Show last command in right bottom bar (HELPFUL!).
 - `set showmode`      = Shows mode (Insert/Normal/Visual) on the bottom left corner (HELPFUL!).
 
+<!-- TOC --><a name="setting-visual-color-columns"></a>
 ### Setting Visual Color columns:
 
 Visual color columns appear on the screen on a particular column number. These are just for display and do not affect the text. The use for such columns are to enable the user to indicate a width for each line (For ex: Helpful while writing a blog post and you want to neatly display the text within a fixed layout)
@@ -763,20 +971,24 @@ Visual color columns appear on the screen on a particular column number. These a
 **Some advanced filetype settings:**
 Learn about the 'au' command/rule from other resources.
 
+<!-- TOC --><a name="some-automatic-window-resizing-commands"></a>
 ### Some Automatic Window Resizing Commands:
 
 `:set winwidth`, `:set winheight`, `:set winminheight`, etc. => Google and find out how automatic resizing takes place.
 
+<!-- TOC --><a name="for-gui-options-macvim"></a>
 ### For GUI options (& MacVim): 
 
 Refer to the .vimrc file settings video (do not bother unless you are working with them!)
 Ex. Rules: 'guifont', 'guioptions', etc.
 
+<!-- TOC --><a name="customizing-vim-pathogen-tool"></a>
 ## Customizing Vim - Pathogen Tool:
 
 'Pathogen' tool is used to install plugins into vim. Before pathogen, it was really hard to install plugins in vim, 
 especially the ones which required certain files to exist in certain folders.
 
+<!-- TOC --><a name="installing-pathogen-steps"></a>
 ### Installing Pathogen (Steps):
 
 - Visit https://github.com/tpope/vim-pathogen
@@ -788,11 +1000,13 @@ The copy/pasted commands will do the following:
 - Create two folders - 'autoload' and 'bundle'.
 - Copy the 'pathogen.vim' source code into the 'autoload' folder.
 
+<!-- TOC --><a name="after-installing-pathogen"></a>
 ### After Installing Pathogen:
 
 We need to add it to our `~/.vimrc` file:
 Add this line after all the 'filetype' rules: `call pathogen#infect()` - This is responsible for loading plugins downloaded to '~/.vim/bundle' folder.
 
+<!-- TOC --><a name="installing-a-plugin-using-pathogen"></a>
 ### Installing a plugin using pathogen:
 
 (This example install 'nerdtree' plugin which is a FILE EXPLORER for Vim.)
@@ -801,6 +1015,7 @@ Add this line after all the 'filetype' rules: `call pathogen#infect()` - This is
 - Follow the installation guide VIA PATHOGEN in the README of the github pages of the plugin. (Usually a 'git clone' command)
 - Nerdtree will be downloaded into a new 'nerdtree' folder inside the '~/.vim/bundle' folder.
 
+<!-- TOC --><a name="structure-of-a-plugin-inside-vimbundleplugin"></a>
 ### Structure of a plugin (Inside `~/.vim/bundle/<plugin>`):
 
 - /doc        = Contains documentation for the plugin.
@@ -809,6 +1024,7 @@ Add this line after all the 'filetype' rules: `call pathogen#infect()` - This is
 
 Apart from these 3 standard folders, other custom folders might exist inside a plugin - which will mostly be triggered from code residing from within the 3 standard folders.
 
+<!-- TOC --><a name="for-nerdtree-plugin"></a>
 ### For Nerdtree plugin: 
 
 Open vim or a folder in vim & you will see a file explorer opened - we may scan through the subdirectories & choose files to open.
@@ -819,6 +1035,7 @@ Open vim or a folder in vim & you will see a file explorer opened - we may scan 
 - Go up one folder in nerdtree: press `q`
 - Show hidden files of a folder: press `I` (Toggle action)
 
+<!-- TOC --><a name="opening-the-nerdtree-left-sidebar-while-a-file-is-opened"></a>
 ### Opening the Nerdtree left sidebar while a file is opened:
 
 - `:NERDTreeToggle`     = Opens if closed / Closes if opened the nerdtree file explorer sidebar.
@@ -826,12 +1043,14 @@ Open vim or a folder in vim & you will see a file explorer opened - we may scan 
 Moving between nerdtree sidebar and file windows:
 Same way in which you move between various windows in a tab - 'CTRL-W' followed by one of h,j,k, or l
 
+<!-- TOC --><a name="adding-a-new-filefolder-using-nerdtree"></a>
 ### Adding a new file/folder using Nerdtree:
 
 Press `m` which opens up a menu.
 From the menu choose the option to '(a)dd a child node'.
 It will create a file/folder with given name in the current Nerdtree directory.
 
+<!-- TOC --><a name="moving-a-filefolder-using-nerdtree"></a>
 ### Moving a file/folder using Nerdtree:
 
 Press `m` which opens up a menu.
@@ -839,6 +1058,7 @@ From the menu choose the option to '(m)ove the current node'.
 You can now edit the path of the file and the file will be moved to the specified path.
 (Similar steps for copying a file)
 
+<!-- TOC --><a name="deleting-a-filefolder-using-nerdtree"></a>
 ### Deleting a file/folder using Nerdtree:
 
 Press `m` which opens up a menu.
@@ -851,12 +1071,15 @@ Many good vim plugins have been created by 'Tim Pope' - https://github.com/tpope
 
 Check out some other cool plugins: 'Snipmate' & 'Command-T'.
 
+<!-- TOC --><a name="vim-color-schemes"></a>
 ## Vim Color Schemes:
 
+<!-- TOC --><a name="check-the-current-color-scheme"></a>
 ### Check the current color scheme:
 
 - `:colorscheme`      = Returns the current color scheme in use (or, just ':colo')
 
+<!-- TOC --><a name="usingapplying-a-colorscheme"></a>
 ### Using/Applying a colorscheme:
 
 `:colorscheme <colorschemename>`    = Applies the specified colorscheme to Vim. (Alternate: ':colo <colorschemename>')
@@ -871,6 +1094,7 @@ Follow the pathogen way of installing. That is, git clone plugin folder into '~/
 
 Note: Type `:colo ` and hit `<TAB>`. It will autocomplete a new colorscheme evey time you hit <TAB>. Hit <ENTER> to apply a color scheme (for that session).
 
+<!-- TOC --><a name="vim-color-schemes-can-have-two-variantsin-built"></a>
 ### Vim color schemes can have two variants(in-built):
 
 One for 'dark' background and one for 'light'.
@@ -885,15 +1109,18 @@ Note:
 
 We can edit a colorscheme setting - open the file & change the rules (NOT RECOMMENDED FOR ALREADY EXISTING COLORSCHEMES).
 
+<!-- TOC --><a name="creating-your-own-colorsheme-files-advanced"></a>
 ### Creating your own colorsheme files (Advanced):
 
 Refer to/watch this screencast: 
 "http://vimcasts.org/episodes/creating-colorschemes-for-vim/"
 
+<!-- TOC --><a name="vim-mappings-and-mapleader"></a>
 ## Vim Mappings and MapLeader:
 
 Mappings help us assign shortcuts to execute long/complex commands.
 
+<!-- TOC --><a name="setting-a-map"></a>
 ### Setting a map:
 
 - `:map <shortcut-characters> <commandtobereplacedbyshortcut>`
@@ -905,6 +1132,7 @@ To automatically execute shortcut for a command, we need to add the ENTER key as
 
 - `:map ,rs :bundle exec rspec<CR>`   = The <CR> stands for Enter/Carriage Return key. The above comand gets executed automatically. (That is, we will not see the entire command appear at the bottom and we need not hit enter to execute it!)
 
+<!-- TOC --><a name="executing-map-shortucts-depending-on-mode"></a>
 ### Executing map shortucts depending on MODE:
 
 - `:map ....`   = Executes mapped shortcuts in Normal, Visual & Operator-pending(Not very important) modes.
@@ -920,6 +1148,7 @@ To automatically execute shortcut for a command, we need to add the ENTER key as
 
 The context menu will contain text options that will autocomplete the current text that we are typing.
 
+<!-- TOC --><a name="key-characters-used-in-maps"></a>
 ### Key characters used in maps:
 
 - `<Tab>`   = The Tab key.
@@ -927,6 +1156,7 @@ The context menu will contain text options that will autocomplete the current te
 - `<C-n>`   = C stands for Control key. So the rule is for holding control and pressing 'n'. (Similarly, we can have any character other than 'n'. Ex: <C-t>, <C-x>, <C-Tab>, etc ...)
 - `<S-n>`   = C stands for Shift key. So the rule is for holding shift and pressing 'n'. (Similarly, we can have any character other than 'n'. Ex: <S-t>, <S-x>, <S-Tab>, etc ...)
 
+<!-- TOC --><a name="recursive-non-recursive-mapping"></a>
 ### Recursive & Non-recursive Mapping:
 - `:remap` is an option that makes mappings work **recursively**. By default it's on and it's better you leave it that way.
 - `:map` and `:noremap` are recursive and non-recursive versions of the various mapping commands. 
@@ -947,21 +1177,25 @@ One that works in normal mode (:nmap and :nnoremap),
 
 One in visual mode (:vmap and :vnoremap) and so on ... !
 
+<!-- TOC --><a name="for-helpinformation-on-mappings"></a>
 ### For help/information on mappings:
 - `:help map`     = Map is actually a function expecting an expression and a string. This function gets executed upon ':map' command.
 
+<!-- TOC --><a name="create-and-use-a-map-leader-for-mappings"></a>
 ### Create and use a Map Leader for Mappings:
 
 VIM MAPLEADER: Choose a key you don't need as a prefix for the map shortcuts: `,` is a good leader key.
 
 - `:let mapleader = ","`
 
+<!-- TOC --><a name="more-information-on-mappings-and-mapleader"></a>
 ### More Information on Mappings and Mapleader:
 
 - http://learnvimscriptthehardway.stevelosh.com/chapters/06.html
 - https://hashrocket.com/blog/posts/8-great-vim-mappings
 
 
+<!-- TOC --><a name="some-useful-vim-plugins"></a>
 ## Some Useful Vim Plugins:
 
 - Auto Pairs: Insert or delete brackets, parentheses and quotes in pairs. (Source: https://github.com/jiangmiao/auto-pairs)
@@ -983,24 +1217,29 @@ https://github.com/hukl/Smyck-Color-Scheme/blob/master/Smyck.terminal (Open term
 
 - Vim-airline (The awesome looking status bar for vim): https://codybonney.com/install-vim-airline-using-pathogen/
 
+<!-- TOC --><a name="further-learning"></a>
 ## Further Learning:
 
+<!-- TOC --><a name="help-with-basics"></a>
 ### Help with Basics:
 
 - `vimtutor` command on the Terminal
 - `:help` (or) `:help <cmd>` inside Vim.
 - `:help options` help with the vimrc options or in-file settings. (List of options available to insert in the vimrc file).
 
+<!-- TOC --><a name="excellent-places-to-learn-vim-tips-how-tos"></a>
 ### Excellent places to learn Vim tips (HOW-TOs):
 
 - http://vimcasts.org/episodes
 - https://code.tutsplus.com/articles/25-vim-tutorials-screencasts-and-resources--net-14631
 - https://vimeo.com/user1690209
 
+<!-- TOC --><a name="most-popular-vim-cheat-sheet"></a>
 ### Most Popular Vim Cheat Sheet:
 
 - http://www.viemu.com/vi-vim-cheat-sheet.gif
 
+<!-- TOC --><a name="10-awesome-color-schemes"></a>
 ### 10 Awesome color schemes:
 
 - http://www.vimninjas.com/2012/08/26/10-vim-color-schemes-you-need-to-own
